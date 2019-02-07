@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8"> 
+     <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet"> 
+     <link href="main.css" rel="stylesheet"> 
+
+<body  onload="document.getElementById('loginButton').click()">
+
+<div id="background"> </div>
+<button id="loginButton" onclick="document.getElementById('id01').style.display='block'">登录</button>
+
+<div id="id01" class="modal">
+  
+  <form class="modal-content animate" action="index.php" method=POST>
+    <div class="imgcontainer">
+      <!--<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>-->
+      <!--<img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar">-->
+      <img src="logo.png" alt="Avatar" class="avatar">
+    </div>
+    <div class="container">
+      <!--<label><b>用户名</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" required>       
+      <label><b>密码</b></label>-->
+
+      <input type="password" placeholder="密码" name="psw" required>
+        
+      <button type="submit" name="sub">好了！</button>
+      <!--<input type="checkbox" checked="checked"> Remember me -->
+    </div>
+
+   <!-- <div class="container" style="background-color:#f1f1f1">
+    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>-->
+    </div>
+  </form>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+
+
+// When the user clicks anywhere outside of the modal, close it
+// i don't want the window to go away.
+//window.onclick = function(event) {
+//    if (event.target == modal) {
+//        modal.style.display = "none";
+//    }
+//}
+</script>
+
+</body>
+</html>
+
