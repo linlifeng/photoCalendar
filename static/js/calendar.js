@@ -126,11 +126,9 @@
                     var expandedi = zeroPad(parseInt(i),2);
 
                     if(isMobile == true){
-                    //html += '<td style="background-image: url(./photos/thumb-'  + String(parseInt(m)+1)+i+y +  '.jpg)"><a class="swipebox" href="./photos/' + String(parseInt(m)+1)+i+y + '.jpg">'  +i+ '</a></td>';}
-                    html += '<td style="background-image: url(./photos/thumb-'  + expandedm+expandedi+y +  '.jpg)"><a class="swipebox" href="./photos/' + expandedm+expandedi+y + '.jpg">'  +i+ '</a></td>';}
+                    html += '<td style="background-image: url(./static/photos/thumb-'  + expandedm+expandedi+y +  '.jpg)"><a class="swipebox" href="./static/photos/' + expandedm+expandedi+y + '.jpg">'  +i+ '</a></td>';}
                     else{
-                    //html += '<td style="background-image: url(./photos/thumb-'  + String(parseInt(m)+1)+i+y +  '.jpg)"><a href="./photos/' + String(parseInt(M)+1)+i+y + '.jpg" data-lightbox="' + m + '">'  +i+ '</a></td>'; }
-                    html += '<td style="background-image: url(./photos/thumb-'  + expandedm+expandedi+y +  '.jpg)"><a href="./photos/' + expandedm+expandedi+y + '.jpg" data-lightbox="' + m + '">'  +i+ '</a></td>'; }
+                    html += '<td style="background-image: url(./static/photos/thumb-'  + expandedm+expandedi+y +  '.jpg)"><a href="./static/photos/' + expandedm+expandedi+y + '.jpg" data-lightbox="' + m + '">'  +i+ '</a></td>'; }
                     //html += '<td style="background-image: url(./thumb-'  + String(parseInt(m)+1)+i+y +  '.jpg)"><a href="./' + String(parseInt(m)+1)+i+y + '.jpg" data-lightbox="' + m + '"></a>' +i+ '</td>';
                     //html += '<td><a href="./' + String(parseInt(m)+1)+i+y + '.jpg" data-lightbox="' + m + '">' + i + '<img src="' + String(parseInt(m)+1)+i+y + '.jpg"></a></td>';
                     //this do not work.. html += '<a href="./' + String(parseInt(m)+1)+i+y + '.jpg" data-lightbox="' + m + '"><td style="background-image: url(./'  + String(parseInt(m)+1)+i+y +  '.jpg)">' + i + '</td></a>';
