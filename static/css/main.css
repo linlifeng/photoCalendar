@@ -97,6 +97,33 @@ opacity: .5;
         .dayHeader{ height: 5%; background-color: rgba(0,0,0,0); font-size: 1em}
         #monthHeader{ font-size: 6em; background-color: rgba(0,0,0,0)}
 
+#clock, #date
+{
+z-index: 3;
+font-size: 5em;
+display: block;
+position: absolute; bottom: 5%;
+padding:0;
+margin:0;
+color: #eee;
+opacity: .3;
+font-family: 'Orbitron', 'Anton'
+}
+#clock{ left:120px;}
+#date{font-size: 8em; right:120px; bottom: 2%}
+
+
+#curtain
+{
+z-index: 2;
+display: block;
+height: 100%; width: 100%;
+position: fixed; top: 0;
+background-color: black;
+background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,0)); /* Standard syntax */
+opacity: .8
+}
+
 
 /* Extra styles for the cancel button */
 .cancelbtn {
@@ -217,31 +244,7 @@ span.psw {
 
 
 
-#clock, #date
-{
-z-index: 3;
-font-size: 5em;
-display: block;
-position: absolute; bottom: 5%;
-padding:0;
-margin:0;
-color: #eee;
-opacity: .3;
-font-family: 'Orbitron', 'Anton'
-}
-#clock{ left:120px;}
-#date{font-size: 8em; right:120px; bottom: 2%}
 
-#curtain
-{
-z-index: 2;
-display: block;
-height: 100%; width: 100%;
-position: fixed; top: 0;
-background-color: black;
-background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,0)); /* Standard syntax */
-opacity: .8
-}
 
 
 /* The Modal (background) */
