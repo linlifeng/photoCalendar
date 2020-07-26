@@ -88,6 +88,13 @@ opacity: .5;
 }
 #btnPrev {left: 0}
 
+body, html{
+    height: 100%;
+    margin: 0;
+    font-family: 'Anton', sans-serif;
+    overflow:hidden
+}
+
        table{z-index: 5;height: 100%; width:100%; position: absolute; top 0; bottom 0; left; 0; right; 0; background-color:rgba(222,222,222,0) }
         tr{height: 13%}
         a{display: block; width: 100%; height:100%; color: rgba(2,2,2,1); opacity:1; text-decoration: none; font-size: 4em}
@@ -240,7 +247,6 @@ span.psw {
 }
 
 /* TODO below are moved from the index. needs to cleanup */
-    body, html{height: 100%; margin: 0; font-family: 'Anton', sans-serif; overflow:hidden}
 
 
 
