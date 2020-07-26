@@ -16,10 +16,8 @@
     <script src="{{ url_for('static', filename='js/handSwipe.js') }}"></script>
     <script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
 </head>
 <body>
-
 
     <div id="background" onclick="showCalendar()"> </div>
     <div id="curtain" onclick="showCalendar()"></div>
@@ -32,31 +30,28 @@
     <div id="clock"></div>
     <div id="date"></div>
 
-
-
-<div id="adminbox" style="display:none">
-        <div id="id01" class="modal">  
+    <!--login modal-->
+    <div id="adminbox" style="display:none">
+        <div id="id01" class="modal">
           <form id="uploadForm" class="modal-content animate" action="" method=POST  enctype="multipart/form-data">
             <div class="imgcontainer">
               <img src="{{ url_for('static', filename='interface_assets/logo.gif') }}" alt="Avatar" class="avatar">
             </div>
             <div class="container">
-              <span id="checkboxBlock"><input type="checkbox" name="current"><p>Also set as backdrop</p></span>
-              <input type="date" name="date" data-date-inline-picker="true" required />       
-              <input type="file" name="image" required/>       
+              <span id="checkboxBlock"><input type="checkbox" name="current">Also set as backdrop</span>
+              <input type="date" name="date" data-date-inline-picker="true" required />
+              <input type="file" name="image" required/>
               <!--<button type="submit" name="sub">好了！</button>-->
               <button name="sub" id="sub">好了！</button>
               <span id="closeAdmin" onclick="hideAdminBox()">Done Uploading.</span>
             </div>
-
-            </div>
           </form>
         </div>
-</div>
-<div id = "infoBox"></div>
-
+    </div>
+    <div id = "infoBox"></div>
+    <!--end login modal-->
  
-    </body>
-    </html>
+</body>
+</html>
 
 
