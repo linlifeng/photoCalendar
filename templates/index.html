@@ -31,24 +31,24 @@
     <div id="date"></div>
 
     <!--login modal-->
-    <div id="adminbox" style="display:none">
-        <div id="id01" class="modal">
-          <form id="uploadForm" class="modal-content animate" action="" method=POST  enctype="multipart/form-data">
-            <div class="imgcontainer">
-              <img src="{{ url_for('static', filename='interface_assets/logo.gif') }}" alt="Avatar" class="avatar">
-            </div>
-            <div class="container">
-              <span id="checkboxBlock"><input type="checkbox" name="current">Also set as backdrop</span>
-              <input type="date" name="date" data-date-inline-picker="true" required />
-              <input type="file" name="image" required/>
-              <!--<button type="submit" name="sub">好了！</button>-->
-              <button name="sub" id="sub">好了！</button>
-              <span id="closeAdmin" onclick="hideAdminBox()">Done Uploading.</span>
-            </div>
-          </form>
-        </div>
-    </div>
-    <div id = "infoBox"></div>
+    {% include "upload_modal.html" %}
+<!--    <div id="adminbox" style="display:none">-->
+<!--        <div id="id01" class="modal">-->
+<!--          <form id="uploadForm" class="modal-content animate" action="/upload_image" method=POST enctype="multipart/form-data">-->
+<!--            <div class="imgcontainer">-->
+<!--              <img src="{{ url_for('static', filename='interface_assets/logo.gif') }}" alt="Avatar" class="avatar">-->
+<!--            </div>-->
+<!--            <div class="container">-->
+<!--              <span id="checkboxBlock"><input type="checkbox" name="current">Also set as backdrop</span>-->
+<!--              <input type="date" name="date" data-date-inline-picker="true" required />-->
+<!--              <input type="file" name="image" required/>-->
+<!--              <button name="sub" id="sub">Submit</button>-->
+<!--              <span id="closeAdmin" onclick="hideAdminBox()">Cancel</span>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div id = "infoBox"></div>-->
     <!--end login modal-->
  
 </body>

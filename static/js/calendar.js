@@ -6,6 +6,13 @@ function UrlExists(url)
     return http.status!=404;
 }
 
+function showUpload()
+{
+    //alert("show_upload!");
+    $( '#adminbox' ).toggle();
+
+}
+
 // Author: AlÃª Monteiro
 // Created: 2013-03-06
 // E-mail: lu.ale.monteiro@gmail.com
@@ -150,7 +157,7 @@ Calendar.prototype.showMonth = function(y, m) {
                         + '</a></td>';
             }
             else{
-                html += '<td><a>' + i + '</a></td>';
+                html += '<td class="empty_date" onclick="showUpload()"><a>' + i + '</a></td>';
             }
         }
         // If Saturday, closes the row
