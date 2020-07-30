@@ -47,10 +47,18 @@ def upload_image():
             y, m, d = request.form['date'].split('-')
             date = m + d + y
             filename = date + '.jpg' # rename uploaded file to the date format so that it can be recognized.
+            thumbnameFilename = 'thumb-' + filename
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            ## making thumbnail
+            # importing Image class from PIL package
+            from PIL import Image
+            # creating a object
+            image = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            MAX_SIZE = (200, 200)
+            image.thumbnail(MAX_SIZE)
+            # creating thumbnail
+            image.save(os.path.join(app.config['UPLOAD_FOLDER'], thumbnameFilename))
 
-            # return redirect(url_for('uploaded_file',
-            #                         filename=filename))
     return render_template("index.html")
 
 

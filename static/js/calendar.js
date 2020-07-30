@@ -6,10 +6,11 @@ function UrlExists(url)
     return http.status!=404;
 }
 
-function showUpload()
+function showUpload(date)
 {
     //alert("show_upload!");
-    $( '#adminbox' ).toggle();
+    //$( '#adminbox' ).toggle();
+    $('#adminbox').load("/uploadbox/" + date).toggle();
 
 }
 
@@ -157,7 +158,9 @@ Calendar.prototype.showMonth = function(y, m) {
                         + '</a></td>';
             }
             else{
-                html += '<td class="empty_date" onclick="showUpload()"><a>' + i + '</a></td>';
+                html += '<td class="empty_date" onclick="showUpload(\''
+                 + y + '-' + expandedm + '-' + expandedi
+                 + '\')"><a>' + i + '</a></td>';
             }
         }
         // If Saturday, closes the row
