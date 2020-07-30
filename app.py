@@ -15,6 +15,12 @@ app.config['UPLOAD_FOLDER'] = PHOTO_FOLDER
 def home():
     return render_template("index.html")
 
+
+@app.route("/uploadbox/<date>", methods=['GET'])
+def uploadbox(date):
+    return render_template("upload_modal.html", date=date)
+
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
