@@ -28,7 +28,13 @@ def write_diary(date):
     d = date[2:4]
     y = date[-4:]
     formatted_date = y + '-' + m + '-' + d
-    return render_template("write_diary.html", date=formatted_date)
+    json_file_name = DIARY_FOLDER + date + '.json'
+    if os.path.exists(json_file_name):
+        existing_content = json.load(open(json_file_name))
+        content = existing_content['content']
+    else:
+        content = ''
+    return render_template("write_diary.html", date=formatted_date, content=content)
 
 
 @app.route("/diary/<date>", methods=['GET'])
@@ -57,7 +63,6 @@ def upload_and_save_image_file(request):
     image.thumbnail(MAX_SIZE)
     # creating thumbnail
     image.save(os.path.join(app.config['UPLOAD_FOLDER'], thumbnameFilename))
-
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -66,8 +71,6 @@ def upload_image():
     if request.method == 'POST':
         # check if the post request has the file part
         if 'image' not in request.files:
-            print("!!!!!!!!!!!no file in payload@@@@@@@@@@@@@")
-            print(request.files)
             flash('No file part')
             return redirect(request.url)
         file = request.files['image']
@@ -77,27 +80,9 @@ def upload_image():
             flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            # print("found file")
-            # # filename = secure_filename(file.filename)
-            # print(dir(request))
-            # print(request.form['date'])
-            # y, m, d = request.form['date'].split('-')
-            # date = m + d + y
-            # filename = date + '.jpg' # rename uploaded file to the date format so that it can be recognized.
-            # thumbnameFilename = 'thumb-' + filename
-            # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            # ## making thumbnail
-            # # importing Image class from PIL package
-            # from PIL import Image
-            # # creating a object
-            # image = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            # MAX_SIZE = (200, 200)
-            # image.thumbnail(MAX_SIZE)
-            # # creating thumbnail
-            # image.save(os.path.join(app.config['UPLOAD_FOLDER'], thumbnameFilename))
-            # ## end making thumbnail
             upload_and_save_image_file(request)
     return render_template("index.html")
+
 
 @app.route("/generate_diary", methods=['POST'])
 def generate_diary():
