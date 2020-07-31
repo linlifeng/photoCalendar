@@ -24,7 +24,11 @@ def uploadbox(date):
 
 @app.route("/write_diary/<date>", methods=['GET'])
 def write_diary(date):
-    return render_template("write_diary.html", date=date)
+    m = date[:2]
+    d = date[2:4]
+    y = date[-4:]
+    formatted_date = y + '-' + m + '-' + d
+    return render_template("write_diary.html", date=formatted_date)
 
 
 @app.route("/diary/<date>", methods=['GET'])
@@ -33,7 +37,8 @@ def render_diary(date):
     photo_f_name = date + '.jpg'
     diary = json.load(open(diary_f_name))
     content = diary['content']
-    return render_template("diary.html", content=content, photo=photo_f_name)
+    date = diary['date']
+    return render_template("diary.html", content=content, photo=photo_f_name, date=date)
 
 
 def upload_and_save_image_file(request):
@@ -98,13 +103,14 @@ def upload_image():
 def generate_diary():
     output = {}
     content = request.form['content']
-    output['content'] = content
 
     y, m, d = request.form['date'].split('-')
     date = m + d + y
     out_filename = app.config['DIARY_FOLDER'] + date + '.json'
     outf = open(out_filename, 'w')
 
+    output['content'] = content
+    output['date'] = date
     outf.write(json.dumps(output))
 
     file = request.files['image']

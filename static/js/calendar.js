@@ -6,22 +6,7 @@ function UrlExists(url)
     return http.status!=404;
 }
 
-function showUpload(date)
-{
-    //alert("show_upload!");
-    //$( '#adminbox' ).toggle();
-    $('#adminbox').load("/uploadbox/" + date).fadeIn();
-}
 
-function showEditDiary(date)
-{
-    $('#adminbox').load("/write_diary/" + date).fadeIn();
-}
-
-function showDiary(date)
-{
-    $('#adminbox').load("/diary/" + date).fadeIn();
-}
 
 
 // Author: AlÃª Monteiro
@@ -178,7 +163,7 @@ Calendar.prototype.showMonth = function(y, m) {
 //                 + y + '-' + expandedm + '-' + expandedi
 //                 + '\')"><a>' + i + '</a></td>';
                 html += '<td class="empty_date" onclick="showEditDiary(\''
-                 + y + '-' + expandedm + '-' + expandedi
+                 + expandedm + expandedi + y
                  + '\')"><a>' + i + '</a></td>';
             }
         }

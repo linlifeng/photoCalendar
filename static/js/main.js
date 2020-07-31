@@ -1,3 +1,21 @@
+// moved from calendar.js
+function showUpload(date)
+{
+    //alert("show_upload!");
+    //$( '#adminbox' ).toggle();
+    $('#adminbox').load("/uploadbox/" + date).fadeIn();
+}
+
+function showEditDiary(date)
+{
+    $('#adminbox').load("/write_diary/" + date).fadeIn();
+}
+
+function showDiary(date)
+{
+    $('#adminbox').load("/diary/" + date).fadeIn();
+}
+
 // moved from main html
 
 function useLightBox(){
@@ -88,20 +106,23 @@ function hideCalendar(){
 }
 
 
-            // Get element by id
-            function getId(id) {
-                return document.getElementById(id);
-            }
+// Get element by id
+function getId(id) {
+    return document.getElementById(id);
+}
 
 
 
 function hideInfo(){
-        $('#infoBox').fadeOut();
+    $('#infoBox').fadeOut();
 }
 function hideAdminBox(){
-        $('#adminbox').fadeOut();
+    $('#adminbox').fadeOut();
 }
 
+function editDiary(){
+    alert("Ha!!");
+}
 
 $( '#uploadForm' )
   .submit( function( e ) {

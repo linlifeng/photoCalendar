@@ -1,5 +1,6 @@
-        <div id="id01" class="modal">
-            {{ content }}
-            <img src="static/photos/{{ photo }}" style="width:50%"/>
-            <button id="closeAdmin" onclick="hideAdminBox()">Cancel</button>
-        </div>
+<div id="id01" class="modal">
+    {{ content }}
+    <img src="static/photos/{{ photo }}" style="width:50%"/>
+    <button id="closeAdmin" onclick="hideAdminBox()">Cancel</button>
+    <button id="edit_diary_button" onclick="showEditDiary('{{ date }}')">Edit</button>
+</div>
