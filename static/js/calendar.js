@@ -10,9 +10,19 @@ function showUpload(date)
 {
     //alert("show_upload!");
     //$( '#adminbox' ).toggle();
-    $('#adminbox').load("/uploadbox/" + date).toggle();
-
+    $('#adminbox').load("/uploadbox/" + date).fadeIn();
 }
+
+function showEditDiary(date)
+{
+    $('#adminbox').load("/write_diary/" + date).fadeIn();
+}
+
+function showDiary(date)
+{
+    $('#adminbox').load("/diary/" + date).fadeIn();
+}
+
 
 // Author: AlÃª Monteiro
 // Created: 2013-03-06
@@ -148,17 +158,26 @@ Calendar.prototype.showMonth = function(y, m) {
                      + '</a></td>';
         }
         else{
-            if(UrlExists('./static/photos/' + expandedm+expandedi+y + '.jpg')){
-                html += '<td style="background-image: url(./static/photos/thumb-'
-                        + expandedm+expandedi+y
-                        +  '.jpg)"><a href="./static/photos/'
-                        + expandedm+expandedi+y
-                        + '.jpg" data-lightbox="' + m + '" data-title="">' // data-lightbox would put images from the same month in the same group
-                        + i
-                        + '</a></td>';
+            // use this for the photo only. Disabling to test the diary function
+//            if(UrlExists('./static/photos/' + expandedm+expandedi+y + '.jpg')){
+//                html += '<td style="background-image: url(./static/photos/thumb-'
+//                        + expandedm+expandedi+y
+//                        +  '.jpg)"><a href="./static/photos/'
+//                        + expandedm+expandedi+y
+//                        + '.jpg" data-lightbox="' + m + '" data-title="">' // data-lightbox would put images from the same month in the same group
+//                        + i
+//                        + '</a></td>';
+            // use below to load diary
+            if(UrlExists('./static/diary/' + expandedm+expandedi+y + '.json')){
+                html += '<td class="empty_date" onclick="showDiary(\''
+                 +  expandedm + expandedi + y
+                 + '\')"><a>' + i + '</a></td>';
             }
             else{
-                html += '<td class="empty_date" onclick="showUpload(\''
+//                html += '<td class="empty_date" onclick="showUpload(\''
+//                 + y + '-' + expandedm + '-' + expandedi
+//                 + '\')"><a>' + i + '</a></td>';
+                html += '<td class="empty_date" onclick="showEditDiary(\''
                  + y + '-' + expandedm + '-' + expandedi
                  + '\')"><a>' + i + '</a></td>';
             }
