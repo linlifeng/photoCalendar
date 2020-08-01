@@ -4,9 +4,10 @@
               <img src="{{ url_for('static', filename='interface_assets/logo.gif') }}" alt="Avatar" class="avatar">
             </div>
             <div class="container">
-                <input type="date" name="date" data-date-inline-picker="true" value="{{ date }}"  required />
+                <input id="diary_date_input" type="date" name="date" data-date-inline-picker="true" value="{{ date }}"  required />
+                <textarea id="diary_content_input" name="content">{{ content }}</textarea>
                 <input type="file" name="image" />
-                <textarea name="content">{{ content }}</textarea>
+
                 <button name="sub" id="sub">Submit</button>
                 <span id="closeAdmin" onclick="hideAdminBox()">Cancel</span>
             </div>

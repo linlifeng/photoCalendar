@@ -61,7 +61,7 @@ opacity: .5;
     height: 100%;
     width: 100%;
     color: red;
-    background:url("../interface_assets/image-blur.jpg") no-repeat center center fixed;
+    /*background:url("../interface_assets/image-blur.jpg") no-repeat center center fixed;*/
     background-size: cover;
 }
 #infoBox{z-index: 10; display: none}
@@ -108,26 +108,46 @@ table{
     background-color:rgba(222,222,222,0)
 }
 tr{
-    height: 13%
+    height: 13%;
 }
         a{display: block; width: 100%; height:100%; color: rgba(2,2,2,1); opacity:1; text-decoration: none; font-size: 4em}
         a:hover{opacity: 0}
-        td{background-size: cover;  background-repeat: no-repeat; opacity: .7; background-color: rgba(0,0,0,0); text-align: center;}
-        td:hover{opacity: 1;}
-        .dayHeader{ height: 5%; background-color: rgba(0,0,0,0); font-size: 1em}
-        #monthHeader{ font-size: 6em; background-color: rgba(0,0,0,0)}
+
+td{
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 1;
+    background-color: rgba(0,0,0,0);
+    /*background:url("../interface_assets/image-blur.jpg") no-repeat center center fixed;*/
+    text-align: center;
+    border-radius: 5px;
+    border: 120px;
+    backdrop-filter: blur(6px);
+
+}
+td:hover{opacity: .8;}
+#monthHeader{
+    border-radius: 5px;
+    opacity: .9;
+    background-image: none;
+    backdrop-filter: blur(6px);
+
+}
+
+.dayHeader{ height: 5%; background-color: rgba(0,0,0,0); font-size: 1em}
+#monthHeader{ font-size: 6em; background-color: rgba(0,0,0,0)}
 
 #clock, #date
 {
-z-index: 3;
-font-size: 5em;
-display: block;
-position: absolute; bottom: 5%;
-padding:0;
-margin:0;
-color: #eee;
-opacity: .3;
-font-family: 'Orbitron', 'Anton'
+    z-index: 3;
+    font-size: 5em;
+    display: block;
+    position: absolute; bottom: 5%;
+    padding:0;
+    margin:0;
+    color: #eee;
+    opacity: .3;
+    font-family: 'Orbitron', 'Anton'
 }
 #clock{ left:120px;}
 #date{font-size: 8em; right:120px; bottom: 2%}
@@ -135,18 +155,49 @@ font-family: 'Orbitron', 'Anton'
 
 #curtain
 {
-z-index: 2;
-display: block;
-height: 100%; width: 100%;
-position: fixed; top: 0;
-background-color: black;
-background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,0)); /* Standard syntax */
-opacity: .8
+    z-index: 2;
+    display: block;
+    height: 100%; width: 100%;
+    position: fixed; top: 0;
+    background-color: black;
+    background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,0)); /* Standard syntax */
+    opacity: .8
 }
 
 #adminbox{
     z-index:100;
 }
+
+#diary_display{
+    background-color: rgba(0, 0, 0, .7);
+    color: white;
+    text-align: center;
+    font-family: 'Dawning of a New Day';
+    font-size: 25px;
+}
+
+#diary_display img{
+    max-height: 50%;
+    width: auto;
+}
+#diary_close_button, #diary_edit_button{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    opacity: .5
+}
+#diary_edit_button{
+    left: 0px;
+}
+
+#uploadForm .container{
+    align: center;
+}
+#diary_content_input{
+	height:100px;
+	width: 100%;
+}
+
 
 
 /* Extra styles for the cancel button */
@@ -322,15 +373,16 @@ input[type=checkbox]{
 
 /* Set a style for all buttons */
 button{
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    bottom: 0px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    font-size: 2em;
+	border: none;
+	padding: 8px 15px 8px 15px;
+	background: #FF8500;
+	color: #fff;
+	box-shadow: 1px 1px 4px #DADADA;
+	-moz-box-shadow: 1px 1px 4px #DADADA;
+	-webkit-box-shadow: 1px 1px 4px #DADADA;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
 }
 
 #closeAdmin{
@@ -363,3 +415,76 @@ img.avatar {
             td.not-current {
                 color: #777;
             }
+
+#uploadForm{
+	max-width: 500px;
+	padding: 20px 12px 10px 20px;
+	font: 13px Arial, Helvetica, sans-serif;
+}
+#uploadForm label{
+	display: block;
+	margin: 0px 0px 15px 0px;
+}
+#uploadForm label > span{
+	width: 100px;
+	font-weight: bold;
+	float: left;
+	padding-top: 8px;
+	padding-right: 5px;
+}
+#uploadForm span.required{
+	color:red;
+}
+#uploadForm .tel-number-field{
+	width: 40px;
+	text-align: center;
+}
+#uploadForm input.input-field, #uploadForm .select-field{
+	width: 48%;
+}
+#uploadForm input.input-field,
+#uploadForm .tel-number-field,
+#uploadForm .textarea-field,
+ #uploadForm .select-field{
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	border: 1px solid #C2C2C2;
+	box-shadow: 1px 1px 4px #EBEBEB;
+	-moz-box-shadow: 1px 1px 4px #EBEBEB;
+	-webkit-box-shadow: 1px 1px 4px #EBEBEB;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	padding: 7px;
+	outline: none;
+}
+#uploadForm .input-field:focus,
+#uploadForm .tel-number-field:focus,
+#uploadForm .textarea-field:focus,
+#uploadForm .select-field:focus{
+	border: 1px solid #0C0;
+}
+#uploadForm .textarea-field{
+	height:100px;
+	width: 55%;
+}
+#uploadForm input[type=submit],
+#uploadForm .container input[type=button]{
+	border: none;
+	padding: 8px 15px 8px 15px;
+	background: #FF8500;
+	color: #fff;
+	box-shadow: 1px 1px 4px #DADADA;
+	-moz-box-shadow: 1px 1px 4px #DADADA;
+	-webkit-box-shadow: 1px 1px 4px #DADADA;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+#uploadForm .container input[type=submit]:hover,
+#uploadForm .container input[type=button]:hover{
+	background: #EA7B00;
+	color: #fff;
+}
+</style>

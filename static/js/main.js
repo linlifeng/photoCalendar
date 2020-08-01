@@ -1,21 +1,24 @@
 // moved from calendar.js
 function showUpload(date)
 {
-    //alert("show_upload!");
-    //$( '#adminbox' ).toggle();
     $('#adminbox').load("/uploadbox/" + date).fadeIn();
 }
 
 function showEditDiary(date)
 {
+    hideDiary();
     $('#adminbox').load("/write_diary/" + date).fadeIn();
 }
 
 function showDiary(date)
 {
-    $('#adminbox').load("/diary/" + date).fadeIn();
+    $('#diary_display').load("/diary/" + date).fadeIn();
 }
 
+function hideDiary()
+{
+    $('#diary_display').fadeOut();
+}
 // moved from main html
 
 function useLightBox(){
@@ -83,10 +86,9 @@ function showCalendar(){
         $("#btnNext").fadeIn('slow');
         $("#btnPrev").fadeIn('slow');
     }
-    $("#clock").fadeOut('slow');
-    $("#date").fadeOut('slow');
-//    $("#clock").animate({top:"0%"},'slow');
-//    $("#date").animate({top:"0%"},'slow');
+    //$("#clock").fadeOut('slow');
+    //$("#date").fadeOut('slow'); //the magical css feature of backdrop filter has made hiding these irrelevant.
+
 //    $('#background').css({filter: 'blur(15px)'}, 'slow');
 }
 function hideCalendar(){

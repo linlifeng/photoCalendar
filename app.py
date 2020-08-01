@@ -41,6 +41,8 @@ def write_diary(date):
 def render_diary(date):
     diary_f_name = DIARY_FOLDER + date + '.json'
     photo_f_name = date + '.jpg'
+    if not os.path.exists(PHOTO_FOLDER + photo_f_name):
+        photo_f_name = 'default_photo.gif'
     diary = json.load(open(diary_f_name))
     content = diary['content']
     date = diary['date']
@@ -54,15 +56,12 @@ def upload_and_save_image_file(request):
     filename = date + '.jpg'  # rename uploaded file to the date format so that it can be recognized.
     thumbnameFilename = 'thumb-' + filename
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    ## making thumbnail
-    # importing Image class from PIL package
-    from PIL import Image
-    # creating a object
-    image = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    MAX_SIZE = (200, 200)
-    image.thumbnail(MAX_SIZE)
-    # creating thumbnail
-    image.save(os.path.join(app.config['UPLOAD_FOLDER'], thumbnameFilename))
+    # ## making thumbnail
+    # from PIL import Image
+    # image = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    # MAX_SIZE = (200, 200)
+    # image.thumbnail(MAX_SIZE)
+    # image.save(os.path.join(app.config['UPLOAD_FOLDER'], thumbnameFilename))
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

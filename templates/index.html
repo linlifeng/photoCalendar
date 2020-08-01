@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/lightbox.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/swipebox.css') }}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dawning+of+a+New+Day">
+
 
     <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
     <script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
@@ -30,27 +32,11 @@
     <div id="clock"></div>
     <div id="date"></div>
 
-    <!--login modal-->
-    <div id="adminbox" style="display:none">
+    <!-- modals -->
+    <div id="adminbox" class="modal" style="display:none"></div>
 
-    {% include "upload_modal.html" %}
-<!--        <div id="id01" class="modal">-->
-<!--          <form id="uploadForm" class="modal-content animate" action="/upload_image" method=POST enctype="multipart/form-data">-->
-<!--            <div class="imgcontainer">-->
-<!--              <img src="{{ url_for('static', filename='interface_assets/logo.gif') }}" alt="Avatar" class="avatar">-->
-<!--            </div>-->
-<!--            <div class="container">-->
-<!--              <span id="checkboxBlock"><input type="checkbox" name="current">Also set as backdrop</span>-->
-<!--              <input type="date" name="date" data-date-inline-picker="true" required />-->
-<!--              <input type="file" name="image" required/>-->
-<!--              <button name="sub" id="sub">Submit</button>-->
-<!--              <span id="closeAdmin" onclick="hideAdminBox()">Cancel</span>-->
-<!--            </div>-->
-<!--          </form>-->
-<!--        </div>-->
-    </div>
-<!--    <div id = "infoBox"></div>-->
-    <!--end login modal-->
+    <div id="diary_display" class="modal" style="display: none"></div>
+    <!--end  modal-->
  
 </body>
 </html>

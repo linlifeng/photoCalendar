@@ -1,6 +1,10 @@
-<div id="id01" class="modal">
-    {{ content }}
+<!--<div id="diary_display" class="modal">-->
+    <p> {{ content }} </p>
     <img src="static/photos/{{ photo }}" style="width:50%"/>
-    <button id="closeAdmin" onclick="hideAdminBox()">Cancel</button>
-    <button id="edit_diary_button" onclick="showEditDiary('{{ date }}')">Edit</button>
-</div>
+    <img id="diary_close_button" src="static/interface_assets/close.png"
+         style="width: 25px"
+         onclick="hideDiary()">
+    <img id="diary_edit_button" src="static/interface_assets/edit-round.png"
+         style="width: 25px"
+         onclick="showEditDiary('{{ date }}')">
+<!--</div>-->
