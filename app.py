@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash
+from flask import Flask, request, render_template, redirect, url_for, flash, send_from_directory
 from werkzeug.utils import secure_filename
 import os, json
 
@@ -16,6 +16,10 @@ app.config['DIARY_FOLDER'] = DIARY_FOLDER
 def home():
     return render_template("index.html")
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route("/uploadbox/<date>", methods=['GET'])
 def uploadbox(date):

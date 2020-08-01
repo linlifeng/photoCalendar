@@ -1,7 +1,7 @@
 <!--<div id="diary_display" class="modal">-->
-    <p> {{ content }} </p>
+    <p> {{ content | safe }} </p>
     <img src="static/photos/{{ photo }}" style="width:50%"/>
-    <img id="diary_close_button" src="static/interface_assets/close.png"
+    <img class="modal_close_button" src="static/interface_assets/close.png"
          style="width: 25px"
          onclick="hideDiary()">
     <img id="diary_edit_button" src="static/interface_assets/edit-round.png"

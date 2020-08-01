@@ -117,13 +117,14 @@ td{
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 1;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(250,250,250,0.2);
     /*background:url("../interface_assets/image-blur.jpg") no-repeat center center fixed;*/
     text-align: center;
     border-radius: 5px;
-    border: 120px;
     backdrop-filter: blur(6px);
-
+}
+td.filled_date{
+    background-color: rgba(50,50,50,.1);
 }
 td:hover{opacity: .8;}
 #monthHeader{
@@ -166,6 +167,7 @@ td:hover{opacity: .8;}
 
 #adminbox{
     z-index:100;
+    text-align: center;
 }
 
 #diary_display{
@@ -180,7 +182,7 @@ td:hover{opacity: .8;}
     max-height: 50%;
     width: auto;
 }
-#diary_close_button, #diary_edit_button{
+#diary_edit_button, .modal_close_button{
     position: fixed;
     top: 0px;
     right: 0px;
@@ -191,13 +193,22 @@ td:hover{opacity: .8;}
 }
 
 #uploadForm .container{
+    width: 80%;
+    display: inline-block;
     align: center;
 }
 #diary_content_input{
 	height:100px;
 	width: 100%;
 }
+#diary_content_input:focus{
+	border: 1px solid #0C0;
+}
 
+#diary_submit_button{
+    color: white;
+    background-color: rgba(0,0,0,0)
+}
 
 
 /* Extra styles for the cancel button */
@@ -243,6 +254,7 @@ span.psw {
     padding-top: 60px;
 }
 
+
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
@@ -253,7 +265,6 @@ span.psw {
     background: url("../interface_assets/image-blur.jpg") no-repeat center center fixed;
     background-size: cover;
 }
-
 
 .modal-content {
     /* this is customizations*/

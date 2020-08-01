@@ -18,6 +18,14 @@
     <script src="{{ url_for('static', filename='js/handSwipe.js') }}"></script>
     <script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script type="text/javascript">
+<!--     $(document).ready(function () {-->
+<!--         $('#diary_content_input').ckeditor();-->
+<!--     });-->
+</script>
+
 </head>
 <body>
 
@@ -33,7 +41,9 @@
     <div id="date"></div>
 
     <!-- modals -->
-    <div id="adminbox" class="modal" style="display:none"></div>
+    <div id="adminbox" class="modal" style="display:none">
+
+    </div>
 
     <div id="diary_display" class="modal" style="display: none"></div>
     <!--end  modal-->

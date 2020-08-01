@@ -154,7 +154,7 @@ Calendar.prototype.showMonth = function(y, m) {
 //                        + '</a></td>';
             // use below to load diary
             if(UrlExists('./static/diary/' + expandedm+expandedi+y + '.json')){
-                html += '<td class="empty_date" onclick="showDiary(\''
+                html += '<td class="filled_date" onclick="showDiary(\''
                  +  expandedm + expandedi + y
                  + '\')"><a>' + i + '</a></td>';
             }

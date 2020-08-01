@@ -1,17 +1,31 @@
-        <div id="id01" class="modal">
-          <form id="uploadForm" class="modal-content animate" action="/generate_diary" method=POST enctype="multipart/form-data">
-            <div class="imgcontainer">
-              <img src="{{ url_for('static', filename='interface_assets/logo.gif') }}" alt="Avatar" class="avatar">
-            </div>
-            <div class="container">
-                <input id="diary_date_input" type="date" name="date" data-date-inline-picker="true" value="{{ date }}"  required />
-                <textarea id="diary_content_input" name="content">{{ content }}</textarea>
-                <input type="file" name="image" />
 
-                <button name="sub" id="sub">Submit</button>
-                <span id="closeAdmin" onclick="hideAdminBox()">Cancel</span>
+
+<!--        <div id="id01" class="modal">-->
+<!--          <form id="uploadForm" class="modal-content animate" action="/generate_diary" method=POST enctype="multipart/form-data">-->
+          <form id="uploadForm" action="/generate_diary" method=POST enctype="multipart/form-data">
+            <!--            <div class="imgcontainer">-->
+<!--              <img src="{{ url_for('static', filename='interface_assets/logo.gif') }}" alt="Avatar" class="avatar">-->
+<!--            </div>-->
+            <div class="container">
+                <input id="diary_date_input" type="date" name="date"
+                       data-date-inline-picker="true" value="{{ date }}"
+                       style="float:left"
+                       required />
+
+                <br/><hr/>
+                <textarea id="diary_content_input" name="content">{{ content }}</textarea>
+                <script>CKEDITOR.replace( 'content' );</script>
+
+                <hr/>
+                <input type="file" name="image" style="width:100%" />
+
+                <button id="diary_submit_button" name="sub">Submit</button>
+                <img class="modal_close_button" src="static/interface_assets/close.png"
+                    style="width: 25px"
+                    onclick="hideAdminBox()">
+<!--                <span id="closeAdmin" onclick="hideAdminBox()">Cancel</span>-->
             </div>
           </form>
-        </div>
+<!--        </div>-->
 
     <div id = "infoBox"></div>
