@@ -173,7 +173,8 @@ td:hover{opacity: .8;}
 #diary_display{
     background-color: rgba(0, 0, 0, .7);
     color: white;
-    text-align: center;
+    padding: 10%;
+    width: 80%;
     font-family: 'Dawning of a New Day';
     font-size: 25px;
 }

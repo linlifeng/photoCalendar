@@ -84,7 +84,8 @@ def upload_image():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             upload_and_save_image_file(request)
-    return render_template("index.html")
+    return '', 204
+
 
 
 @app.route("/generate_diary", methods=['POST'])
@@ -104,7 +105,7 @@ def generate_diary():
     file = request.files['image']
     if file and allowed_file(file.filename):
         upload_and_save_image_file(request)
-    return render_template("index.html")
+    return '', 204
 
 if __name__ == "__main__":
     app.secret_key = 'some secret key'
