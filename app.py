@@ -2,12 +2,12 @@ from flask import Flask, request, render_template, redirect, url_for, flash, sen
 from werkzeug.utils import secure_filename
 import os, json
 
-PHOTO_FOLDER = '/Users/lifenglin/dev/sites/photoCalendar/lelecenter/static/photos/'
-DIARY_FOLDER = '/Users/lifenglin/dev/sites/photoCalendar/lelecenter/static/diary/'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 
 app = Flask(__name__)
+PHOTO_FOLDER = app.root_path + '/static/photos/'
+DIARY_FOLDER = app.root_path + '/static/diary/'
 app.config['UPLOAD_FOLDER'] = PHOTO_FOLDER
 app.config['DIARY_FOLDER'] = DIARY_FOLDER
 
