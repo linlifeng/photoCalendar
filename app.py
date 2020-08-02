@@ -69,7 +69,7 @@ def show_diary_modal(date):
 
 
 def upload_and_save_image_file(request):
-    file = request.files['image']
+    file = request.files['diary_image_upload_input']
     y, m, d = request.form['date'].split('-')
     date = m + d + y
     filename = date + '.jpg'  # rename uploaded file to the date format so that it can be recognized.
@@ -117,7 +117,7 @@ def generate_diary():
     output['date'] = date
     outf.write(json.dumps(output))
 
-    file = request.files['image']
+    file = request.files['diary_image_upload_input']
     if file and allowed_file(file.filename):
         upload_and_save_image_file(request)
     return '', 204

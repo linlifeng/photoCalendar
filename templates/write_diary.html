@@ -4,13 +4,16 @@
                data-date-inline-picker="true" value="{{ date }}"
                style="float:left"
                required />
-
         <br/><hr/>
         <textarea id="diary_content_input" name="content">{{ content }}</textarea>
-        <script>CKEDITOR.replace( 'content', {height: 400} );</script>
+        <script>CKEDITOR.replace( 'content' );</script>
 
         <hr/>
-        <input type="file" name="image" style="width:100%" />
+
+        <label for="diary_image_upload_input" id="camera_label"><img src="static/interface_assets/camera.png"></label>
+        <br/>
+        <input type="file" name="diary_image_upload_input" id="diary_image_upload_input" style="display: none" />
+
 
         <button id="diary_submit_button" name="sub" onclick="hideDiary()">Submit</button>
         <img class="modal_close_button" src="static/interface_assets/close.png"

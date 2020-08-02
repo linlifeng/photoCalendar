@@ -208,7 +208,7 @@ td:hover{opacity: .8;}
 }
 
 #uploadForm .container{
-    width: 80%;
+    width: 100%;
     display: inline-block;
     align: center;
 }
@@ -224,7 +224,12 @@ td:hover{opacity: .8;}
     color: white;
     background-color: rgba(0,0,0,0)
 }
-
+#camera_label{
+    display: block;
+    text-align:center;
+    }
+#camera_label img{
+height: 100px;}
 
 /* Extra styles for the cancel button */
 .cancelbtn {
