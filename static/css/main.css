@@ -134,6 +134,10 @@ td{
 td.filled_date{
     background-color: rgba(50,50,50,.1);
 }
+td.today a{
+    background-color: rgba(50,50,50,.1);
+    color: black;
+}
 td:hover{opacity: .8;}
 #monthHeader{
     border-radius: 5px;

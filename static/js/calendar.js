@@ -1,10 +1,10 @@
-function UrlExists(url)
-{
-    var http = new XMLHttpRequest();
-    http.open('HEAD', url, false);
-    http.send();
-    return http.status!=404;
-}
+//function UrlExists(url)
+//{
+//    var http = new XMLHttpRequest();
+//    http.open('HEAD', url, false);
+//    http.send();
+//    return http.status!=404;
+//}
 
 
 
@@ -155,16 +155,20 @@ Calendar.prototype.showMonth = function(y, m) {
 //        }
 
          // use below to load diary
-//        if(UrlExists('./static/diary/' + expandedm+expandedi+y + '.json')){
-            html += '<td class="filled_date" onclick="showDiary(\''
+         var today = new Date();
+         var today_day = today.getDate();
+         var today_year = today.getFullYear();
+         var today_month = today.getMonth() + 1;
+         if(m+1 == today_month && i == today_day && y == today_year){
+            html += '<td class="today" onclick="showDiary(\''
              +  expandedm + expandedi + y
              + '\')"><a>' + i + '</a></td>';
-//        }
-//        else{
-//            html += '<td class="empty_date" onclick="showEditDiary(\''
-//             + expandedm + expandedi + y
-//             + '\')"><a>' + i + '</a></td>';
-//        }
+        }
+        else{
+            html += '<td class="empty_date" onclick="showDiary(\''
+             +  expandedm + expandedi + y
+             + '\')"><a>' + i + '</a></td>';
+        }
         // If Saturday, closes the row
         if ( dow == 6 ) {
             html += '</tr>';
