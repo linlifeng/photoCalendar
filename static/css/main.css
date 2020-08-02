@@ -185,12 +185,12 @@ td:hover{opacity: .8;}
 }
 #diary_edit_button, .modal_close_button{
     position: fixed;
-    top: 0px;
-    right: 0px;
+    top: 10px;
+    right: 10px;
     opacity: .5
 }
 #diary_edit_button{
-    left: 0px;
+    left: 10px;
 }
 
 #uploadForm .container{

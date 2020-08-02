@@ -1,5 +1,3 @@
-
-
 // moved from calendar.js
 function showUpload(date)
 {
@@ -75,23 +73,16 @@ function checkTime(i) {
 }
 
 
-
 function showCalendar(){
-    //alert("Ha!")
-    //$("#background").fadeOut('fast');
     $("#blurbackground").fadeIn('fast','linear', function(){
             $("#calendarTable").animate({top:"0px"},'fast');
      });
-    //$('#curtain').fadeOut('fast');
-    $("#calendarTable").fadeIn('fast');
+    $("#divCalendar").fadeIn('fast');
+    //$("#calendarTable").fadeIn('fast');
     if(isMobile!=true){
         $("#btnNext").fadeIn('slow');
         $("#btnPrev").fadeIn('slow');
     }
-    //$("#clock").fadeOut('slow');
-    //$("#date").fadeOut('slow'); //the magical css feature of backdrop filter has made hiding these irrelevant.
-
-//    $('#background').css({filter: 'blur(15px)'}, 'slow');
 }
 function hideCalendar(){
     startTime();
@@ -99,14 +90,10 @@ function hideCalendar(){
             $("#blurbackground").fadeOut('fast');
             $('#curtain').fadeIn('fast');
     });
-    //$("#calendarTable").fadeOut('fast');
     $("#btnNext").fadeOut('slow');
     $("#btnPrev").fadeOut('slow');
     $("#clock").fadeIn('slow');
     $("#date").fadeIn('slow');
-    //$("#clock").animate({top:"85%"},'slow');
-    //$("#date").animate({top:"75%"},'slow');
-    //$('#background').css({filter: 'blur(0px)'}, 'slow');
 }
 
 
@@ -124,22 +111,19 @@ function hideAdminBox(){
     $('#adminbox').fadeOut();
 }
 
-function editDiary(){
-    alert("Ha!!");
-}
 
-$( '#uploadForm' )
-  .submit( function( e ) {
-    $.ajax( {
-      url: './upload.php',
-      type: 'POST',
-      data: new FormData( this ),
-      processData: false,
-      contentType: false,
-      success: function(data){
-        $('#infoBox').html('<button id="closeInfo" onclick="hideInfo()">' + data + '</button>').fadeIn('fast');
-        }
-
-    } );
-    e.preventDefault();
-  } );
+//$( '#uploadForm' )
+//  .submit( function( e ) {
+//    $.ajax( {
+//      url: './upload.php',
+//      type: 'POST',
+//      data: new FormData( this ),
+//      processData: false,
+//      contentType: false,
+//      success: function(data){
+//        $('#infoBox').html('<button id="closeInfo" onclick="hideInfo()">' + data + '</button>').fadeIn('fast');
+//        }
+//
+//    } );
+//    e.preventDefault();
+//  } );

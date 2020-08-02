@@ -133,17 +133,17 @@ Calendar.prototype.showMonth = function(y, m) {
         var expandedm = zeroPad(parseInt(m)+1,2);
         var expandedi = zeroPad(parseInt(i),2);
 
-        if(isMobile == true){
-            html += '<td style="background-image: url(./static/photos/thumb-'
-                     + expandedm+expandedi+y
-                     +  '.jpg)"><a class="swipebox" href="./static/photos/'
-                     + expandedm+expandedi+y
-                     + '.jpg">'
-                     + i
-                     + '</a></td>';
-        }
-        else{
-            // use this for the photo only. Disabling to test the diary function
+// photo only with mobile swipe box
+//        if(isMobile == true){
+//            html += '<td style="background-image: url(./static/photos/thumb-'
+//                     + expandedm+expandedi+y
+//                     +  '.jpg)"><a class="swipebox" href="./static/photos/'
+//                     + expandedm+expandedi+y
+//                     + '.jpg">'
+//                     + i
+//                     + '</a></td>';
+//        }
+//        else{
 //            if(UrlExists('./static/photos/' + expandedm+expandedi+y + '.jpg')){
 //                html += '<td style="background-image: url(./static/photos/thumb-'
 //                        + expandedm+expandedi+y
@@ -152,20 +152,18 @@ Calendar.prototype.showMonth = function(y, m) {
 //                        + '.jpg" data-lightbox="' + m + '" data-title="">' // data-lightbox would put images from the same month in the same group
 //                        + i
 //                        + '</a></td>';
-            // use below to load diary
-            if(UrlExists('./static/diary/' + expandedm+expandedi+y + '.json')){
-                html += '<td class="filled_date" onclick="showDiary(\''
-                 +  expandedm + expandedi + y
-                 + '\')"><a>' + i + '</a></td>';
-            }
-            else{
-//                html += '<td class="empty_date" onclick="showUpload(\''
-//                 + y + '-' + expandedm + '-' + expandedi
-//                 + '\')"><a>' + i + '</a></td>';
-                html += '<td class="empty_date" onclick="showEditDiary(\''
-                 + expandedm + expandedi + y
-                 + '\')"><a>' + i + '</a></td>';
-            }
+//        }
+
+         // use below to load diary
+        if(UrlExists('./static/diary/' + expandedm+expandedi+y + '.json')){
+            html += '<td class="filled_date" onclick="showDiary(\''
+             +  expandedm + expandedi + y
+             + '\')"><a>' + i + '</a></td>';
+        }
+        else{
+            html += '<td class="empty_date" onclick="showEditDiary(\''
+             + expandedm + expandedi + y
+             + '\')"><a>' + i + '</a></td>';
         }
         // If Saturday, closes the row
         if ( dow == 6 ) {

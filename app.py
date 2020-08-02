@@ -13,13 +13,20 @@ app.config['DIARY_FOLDER'] = DIARY_FOLDER
 
 
 @app.route("/", methods=['GET', 'POST'])
-def home():
-    return render_template("index.html")
+def default_home():
+    return render_template("index.html", greetings="")
+
+
+@app.route("/<username>", methods=['GET', 'POST'])
+def user_home(username):
+    return render_template("index.html", greetings="Hello " + username)
+
 
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
 
 @app.route("/uploadbox/<date>", methods=['GET'])
 def uploadbox(date):
