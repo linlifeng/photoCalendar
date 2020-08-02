@@ -7,14 +7,14 @@
 
         <br/><hr/>
         <textarea id="diary_content_input" name="content">{{ content }}</textarea>
-        <script>CKEDITOR.replace( 'content' );</script>
+        <script>CKEDITOR.replace( 'content', {height: 400} );</script>
 
         <hr/>
         <input type="file" name="image" style="width:100%" />
 
-        <button id="diary_submit_button" name="sub" onclick="hideAdminBox()">Submit</button>
+        <button id="diary_submit_button" name="sub" onclick="hideDiary()">Submit</button>
         <img class="modal_close_button" src="static/interface_assets/close.png"
             style="width: 30px"
-            onclick="hideAdminBox()">
+            onclick="hideDiary()">
     </div>
 </form>

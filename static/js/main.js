@@ -1,13 +1,12 @@
 // moved from calendar.js
-function showUpload(date)
-{
-    $('#adminbox').load("/uploadbox/" + date).fadeIn();
-}
+//function showUpload(date)
+//{
+//    $('#adminbox').load("/uploadbox/" + date).fadeIn();
+//}
 
 function showEditDiary(date)
 {
-    hideDiary();
-    $('#adminbox').load("/write_diary/" + date).fadeIn();
+    $('#diary_display').load("/write_diary/" + date).fadeIn();
 }
 
 function showDiary(date)

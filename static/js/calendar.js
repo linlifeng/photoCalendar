@@ -155,16 +155,16 @@ Calendar.prototype.showMonth = function(y, m) {
 //        }
 
          // use below to load diary
-        if(UrlExists('./static/diary/' + expandedm+expandedi+y + '.json')){
+//        if(UrlExists('./static/diary/' + expandedm+expandedi+y + '.json')){
             html += '<td class="filled_date" onclick="showDiary(\''
              +  expandedm + expandedi + y
              + '\')"><a>' + i + '</a></td>';
-        }
-        else{
-            html += '<td class="empty_date" onclick="showEditDiary(\''
-             + expandedm + expandedi + y
-             + '\')"><a>' + i + '</a></td>';
-        }
+//        }
+//        else{
+//            html += '<td class="empty_date" onclick="showEditDiary(\''
+//             + expandedm + expandedi + y
+//             + '\')"><a>' + i + '</a></td>';
+//        }
         // If Saturday, closes the row
         if ( dow == 6 ) {
             html += '</tr>';

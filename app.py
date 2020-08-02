@@ -28,9 +28,9 @@ def favicon():
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
-@app.route("/uploadbox/<date>", methods=['GET'])
-def uploadbox(date):
-    return render_template("upload_modal.html", date=date)
+# @app.route("/uploadbox/<date>", methods=['GET'])
+# def uploadbox(date):
+#     return render_template("upload_modal.html", date=date)
 
 
 @app.route("/write_diary/<date>", methods=['GET'])
@@ -47,8 +47,6 @@ def write_diary(date):
         content = ''
     return render_template("write_diary.html", date=formatted_date, content=content)
 
-
-@app.route("/diary/<date>", methods=['GET'])
 def render_diary(date):
     diary_f_name = DIARY_FOLDER + date + '.json'
     photo_f_name = date + '.jpg'
@@ -58,6 +56,16 @@ def render_diary(date):
     content = diary['content']
     date = diary['date']
     return render_template("diary.html", content=content, photo=photo_f_name, date=date)
+
+@app.route("/diary/<date>", methods=['GET'])
+def show_diary_modal(date):
+    diary_f_name = DIARY_FOLDER + date + '.json'
+    if not os.path.exists(diary_f_name):
+        return write_diary(date)
+    else:
+        return render_diary(date)
+
+
 
 
 def upload_and_save_image_file(request):

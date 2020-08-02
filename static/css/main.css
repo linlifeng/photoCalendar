@@ -209,7 +209,7 @@ td:hover{opacity: .8;}
     align: center;
 }
 #diary_content_input{
-	height:100px;
+	height:65vh;
 	width: 100%;
 }
 #diary_content_input:focus{
