@@ -64,6 +64,8 @@ function showCalendar(){
             $("#calendarTable").animate({top:"0px"},'fast');
      });
     $("#divCalendar").fadeIn('fast');
+    $("#btnNext").fadeIn('medium');
+    $("#btnPrev").fadeIn('medium');
 }
 function hideCalendar(){
     startTime();
