@@ -13,10 +13,11 @@ if( isMobile == true) {
     var today = new Date();
     var today_day = today.getDate();
     var today_year = today.getFullYear();
-    var today_month = today.getMonth() + 1;    useSwipeBox();
+    var today_month = today.getMonth();
     var expandedm = zeroPad(parseInt(today_month)+1,2);
     var expandedi = zeroPad(parseInt(today_day),2);
     date = expandedm + expandedi + today_year;
+    useSwipeBox();
     showCalendar();
     $("#btnNext").hide();
     $("#btnPrev").hide();
