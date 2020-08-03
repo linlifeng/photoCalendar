@@ -155,17 +155,22 @@ Calendar.prototype.showMonth = function(y, m) {
 //        }
 
          // use below to load diary
+
          var today = new Date();
          var today_day = today.getDate();
          var today_year = today.getFullYear();
          var today_month = today.getMonth() + 1;
          if(m+1 == today_month && i == today_day && y == today_year){
-            html += '<td class="today" onclick="showDiary(\''
+            html += '<td class="today" style="background-image: url(./static/photos/thumb-'
+                        + expandedm+expandedi+y
+                        +  '.jpg)" onclick="showDiary(\''
              +  expandedm + expandedi + y
              + '\')"><a>' + i + '</a></td>';
         }
         else{
-            html += '<td class="empty_date" onclick="showDiary(\''
+            html += '<td class="empty_date" style="background-image: url(./static/photos/thumb-'
+                        + expandedm+expandedi+y
+                        +  '.jpg)" onclick="showDiary(\''
              +  expandedm + expandedi + y
              + '\')"><a>' + i + '</a></td>';
         }

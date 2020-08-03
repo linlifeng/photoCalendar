@@ -130,9 +130,13 @@ td{
     border-radius: 10px;
     backdrop-filter: blur(6px);
     color: white;
+    opacity: 0.6;
 }
 td.filled_date{
     background-color: rgba(50,50,50,.1);
+}
+td a{
+    color: rgb(200,200,200);
 }
 td.today a{
     background-color: rgba(50,50,50,.1);

@@ -78,6 +78,7 @@ def upload_and_save_image_file(request):
     thumbnameFilename = 'thumb-' + filename
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     # ## making thumbnail
+    os.system('ln -s %s %s'%(PHOTO_FOLDER+'white_pixel.png', PHOTO_FOLDER+thumbnameFilename))
     # from PIL import Image
     # image = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     # MAX_SIZE = (200, 200)
