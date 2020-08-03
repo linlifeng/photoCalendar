@@ -1,8 +1,6 @@
     <p> {{ content | safe }} </p>
     <img class="diary_image" src="static/photos/{{ photo }}"/>
     <img class="modal_close_button" src="static/interface_assets/close.png"
-         style="width: 30px"
          onclick="hideDiary()">
     <img id="diary_edit_button" src="static/interface_assets/edit.png"
-         style="width: 30px"
          onclick="showEditDiary('{{ date }}')">

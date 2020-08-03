@@ -186,6 +186,7 @@ td:hover{opacity: .8;}
     background-color: rgba(0, 0, 0, .7);
     color: white;
     padding: 10%;
+    padding-top: 3%;
     width: 80%;
     font-family: 'Dawning of a New Day';
     font-size: 25px;
@@ -197,15 +198,19 @@ td:hover{opacity: .8;}
   margin-right: auto;
   width: 50%;
 }
-#diary_edit_button, .modal_close_button{
+#diary_edit_button, .modal_close_button, #diary_save_button{
     position: fixed;
     top: 10px;
     right: 10px;
-    opacity: .5
+    width: 80px;
+    opacity: .8;
 }
-#diary_edit_button{
+#diary_edit_button, #diary_save_button{
     left: 10px;
+    background-color: rgba(0,0,0,0)
 }
+#diary_submit_button{background-color: rgba(0,0,0,0)}
+
 
 #uploadForm .container{
     width: 100%;
@@ -215,15 +220,17 @@ td:hover{opacity: .8;}
 #diary_content_input{
 	height:65vh;
 	width: 100%;
+	opacity: .7;
 }
 #diary_content_input:focus{
 	border: 1px solid #0C0;
 }
-
-#diary_submit_button{
-    color: white;
-    background-color: rgba(0,0,0,0)
+#diary_date_input{
+    font-size: 2em;
+    font-family: anton;
+    opacity: .7;
 }
+
 #camera_label{
     display: block;
     text-align:center;

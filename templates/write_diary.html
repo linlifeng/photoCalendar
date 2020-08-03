@@ -4,7 +4,7 @@
                data-date-inline-picker="true" value="{{ date }}"
                style="float:left"
                required />
-        <br/><hr/>
+        <br/><br/><hr/>
         <textarea id="diary_content_input" name="content">{{ content }}</textarea>
         <script>CKEDITOR.replace( 'content' );</script>
 
@@ -14,10 +14,10 @@
         <br/>
         <input type="file" name="diary_image_upload_input" id="diary_image_upload_input" style="display: none" />
 
-
-        <button id="diary_submit_button" name="sub" onclick="hideDiary()">Submit</button>
+        <button id="diary_submit_button" name="sub" onclick="hideDiary()">
+            <img id="diary_save_button" src="static/interface_assets/save.png">
+        </button>
         <img class="modal_close_button" src="static/interface_assets/close.png"
-            style="width: 30px"
             onclick="hideDiary()">
     </div>
 </form>

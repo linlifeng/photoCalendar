@@ -59,8 +59,10 @@ def render_diary(date):
 
 @app.route("/diary/<date>", methods=['GET'])
 def show_diary_modal(date):
+    #print(date)
     diary_f_name = DIARY_FOLDER + date + '.json'
     if not os.path.exists(diary_f_name):
+        print("new:",date)
         return write_diary(date)
     else:
         return render_diary(date)
