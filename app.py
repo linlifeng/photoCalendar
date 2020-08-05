@@ -139,6 +139,22 @@ def generate_diary():
         upload_and_save_image_file(request)
     return '', 204
 
+@app.route("/search/<key>")
+def search_diary(key):
+    import subprocess
+    try:
+        result = subprocess.check_output('grep %s %s*' % (key, DIARY_FOLDER), shell=True)
+    except subprocess.CalledProcessError:
+        return "%s is not found in any entries." % key
+
+    result_list = result.decode('utf-8').split('\n')
+    files = []
+    for hit in result_list:
+        file = hit.replace(DIARY_FOLDER, '').split(':')[0]
+        files.append(file)
+
+    return str(files)
+
 if __name__ == "__main__":
     app.secret_key = 'some secret key'
     app.run(debug=True, host='0.0.0.0')
