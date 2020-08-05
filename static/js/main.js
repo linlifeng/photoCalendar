@@ -66,6 +66,7 @@ function showCalendar(){
     $("#divCalendar").fadeIn('fast');
     $("#btnNext").fadeIn('medium');
     $("#btnPrev").fadeIn('medium');
+    hideSearchResult();
 }
 function hideCalendar(){
     startTime();
@@ -94,5 +95,18 @@ function hideAdminBox(){
     $('#adminbox').fadeOut();
 }
 
+function showSearchResult(){
+    $('#search_result').fadeIn();
+}
+function hideSearchResult(){
+    $('#search_result').fadeOut();
+}
+
+$("#search_input").focus(function(){
+    showSearchResult();
+});
 
 
+$("#curtain").click(function(){
+    hideSearchResult();
+});

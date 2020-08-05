@@ -29,9 +29,9 @@
 <body>
     <div id="searchBar">
         <form action="/search">
-            <input type="text" id="search_input" name="query" placeholder="Search..">
+            <input type="search" id="search_input" name="search" pattern=".*\S.*" placeholder="Search..">
         </form>
-        <div id="searchResult">{{ search_result | safe }}</div>
+        <div id="search_result">{{ search_result | safe }}</div>
     </div>
 
 

@@ -64,9 +64,19 @@ opacity: .5;
 }
 #infoBox{z-index: 10; display: none}
 
-#searchBar{
+#search_input{
     position: fixed;
-    z-index: 100;
+    top: 10px;
+    height:30px;
+    width:400px;
+    border-radius: 10px;
+    opacity: .5;
+    z-index: 4;
+}
+#search_result{
+    position: fixed;
+    top: 50px;
+    z-index: 4;
 }
 #btnNext, #btnPrev {
 	z-index: 6; 
@@ -131,9 +141,8 @@ td{
     /*background:url("../interface_assets/image-blur.jpg") no-repeat center center fixed;*/
     text-align: center;
     border-radius: 10px;
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(10px);
     color: white;
-    opacity: 0.6;
 }
 td.filled_date{
     background-color: rgba(50,50,50,.1);

@@ -142,7 +142,7 @@ def generate_diary():
 
 @app.route("/search", methods=['POST','GET'])
 def search_diary():
-    key = request.args['query']
+    key = request.args['search']
     if not key:
         return render_template("index.html")
     import subprocess
