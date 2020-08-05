@@ -64,7 +64,10 @@ opacity: .5;
 }
 #infoBox{z-index: 10; display: none}
 
-
+#searchBar{
+    position: fixed;
+    z-index: 100;
+}
 #btnNext, #btnPrev {
 	z-index: 6; 
 	position: fixed; 

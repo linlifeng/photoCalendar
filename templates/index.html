@@ -27,6 +27,13 @@
 
 </head>
 <body>
+    <div id="searchBar">
+        <form action="/search">
+            <input type="text" id="search_input" name="query" placeholder="Search..">
+        </form>
+        <div id="searchResult">{{ search_result | safe }}</div>
+    </div>
+
 
     <div id="background" onclick="showCalendar()"> </div>
     <div id="curtain" onclick="showCalendar()">{{ greetings }}</div>
