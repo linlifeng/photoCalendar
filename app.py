@@ -143,17 +143,22 @@ def generate_diary():
 @app.route("/search", methods=['POST','GET'])
 def search_diary():
     key = request.args['search']
+    search_result = '<table id="search_result_table">'
+
     if not key:
         return render_template("index.html")
     import subprocess
     try:
-        result = subprocess.check_output('grep "%s" %s*' % (key, DIARY_FOLDER), shell=True)
+        result = subprocess.check_output('grep -i "%s" %s*' % (key, DIARY_FOLDER), shell=True)
     except subprocess.CalledProcessError:
-        search_result = "%s is not found in any entries." % key
+        search_result += "<tr><td>%s is not found in any entries.</tr></td>" % key
+        search_result += '<tr><td><img src="/static/interface_assets/close.png" ' \
+                         'style="width:60px;"' \
+                         'onclick="hideSearchResult()"></td></tr>'
+        search_result += '</table>'
         return render_template("index.html", search_result=search_result)
 
     result_list = result.decode('utf-8').split('\n')
-    search_result = '<table id="search_result_table">'
     # search_result = ''
     import re
     for hit in result_list:
