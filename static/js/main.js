@@ -66,7 +66,7 @@ function showCalendar(){
     $("#divCalendar").fadeIn('fast');
     $("#btnNext").fadeIn('medium');
     $("#btnPrev").fadeIn('medium');
-    hideSearchResult();
+    //hideSearchResult();
 }
 function hideCalendar(){
     startTime();

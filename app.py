@@ -153,12 +153,29 @@ def search_diary():
         return render_template("index.html", search_result=search_result)
 
     result_list = result.decode('utf-8').split('\n')
-    search_result = ''
+    search_result = '<table id="search_result_table">'
+    # search_result = ''
+    import re
     for hit in result_list:
         file = hit.replace(DIARY_FOLDER, '').split(':')[0]
         date = file.split('.')[0]
-        link = '<a onclick="showDiary(\'%s\')">%s</a><br/>' % (date, date)
-        search_result += link
+        m = date[:2]
+        d = date[2:4]
+        y = date[4:]
+        formatted_date = '-'.join([y, m, d])
+        if date:
+            hit_content = ':'.join(hit.replace(DIARY_FOLDER, '').split(':')[1:])
+            hit_content = json.loads(hit_content)['content']
+            hit_content = re.sub('<[^<]+>', "", hit_content)
+            if len(hit_content) > 50:
+                hit_content = hit_content[:50] + '...'
+            link = '<a onclick="showDiary(\'%s\')">%s</a><br/>' % (date, formatted_date)
+            row='<tr><td>' + link + '</td><td>' + hit_content + '</td></tr>'
+            search_result += row
+    search_result += '<tr><td><img src="/static/interface_assets/close.png" ' \
+                     'style="width:60px;"' \
+                     'onclick="hideSearchResult()"></td></tr>'
+    search_result += '</table>'
     return render_template("index.html", search_result=search_result)
 
 if __name__ == "__main__":

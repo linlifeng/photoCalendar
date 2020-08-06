@@ -66,17 +66,52 @@ opacity: .5;
 
 #search_input{
     position: fixed;
-    top: 10px;
-    height:30px;
-    width:400px;
-    border-radius: 10px;
+    top: 10%;
+    left: 10%;
+    height:5%;
+    width:80%;
+    border-radius: 99999px;
+    font-size: large;
+    border: none;
     opacity: .5;
+    padding-left: 20px;
     z-index: 4;
 }
+
 #search_result{
     position: fixed;
-    top: 50px;
+    top: 20%;
+    width: 100%;
+    height: 75%;
+    padding: 0px;
+    /*backdrop-filter: blur(10px);*/
+    overflow: auto;
     z-index: 4;
+}
+
+#search_result_table{
+    height: auto;
+    margin-left: 10%;
+    width: 80%;
+    backdrop-filter: blur(10px);
+    box-shadow: 5px 5px 14px rgba(250,250,250,.6);
+    color: white;
+}
+#search_result_table tr{
+    height: 10%;
+}
+#search_result_table td{
+    padding: 3px;
+    font-size: 2em;
+    font-family: 'Dawning of a New Day', 'Long Cang' ;
+}
+#search_result_table td a{
+    display: inline;
+    color: black;
+}
+#search_result_table button{
+    display: inline;
+    background-color: none;
 }
 #btnNext, #btnPrev {
 	z-index: 6; 
@@ -122,18 +157,13 @@ tr{
     height: 13%;
 }
 
+
 a{
-    display: block;
-    width: 100%;
-    height:100%;
-    color: rgba(255,255,255, .8);
-    opacity:1;
-    text-decoration: none;
-    font-size: 4em
+    cursor: pointer;
 }
 a:hover{opacity: 1}
 
-td{
+#calendarTable td{
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 1;
@@ -144,17 +174,24 @@ td{
     backdrop-filter: blur(10px);
     color: white;
 }
-td.filled_date{
+#calendarTable td.filled_date{
     background-color: rgba(50,50,50,.1);
 }
-td a{
+#calendarTable td a{
+    display: block;
+    width: 100%;
+    height:100%;
+    color: rgba(255,255,255, .8);
+    opacity:1;
+    text-decoration: none;
+    font-size: 4em;
     color: rgb(200,200,200);
 }
-td.today a{
+#calendarTable td.today a{
     background-color: rgba(50,50,50,.1);
     color: black;
 }
-td:hover{opacity: .8;}
+#calendarTable td:hover{opacity: .8;}
 #monthHeader{
     border-radius: 5px;
     opacity: .9;
@@ -236,7 +273,7 @@ td:hover{opacity: .8;}
 #diary_content_input{
 	height:65vh;
 	width: 100%;
-	opacity: .7;
+	opacity: .6;
 }
 #diary_content_input:focus{
 	border: 1px solid #0C0;
@@ -244,6 +281,9 @@ td:hover{opacity: .8;}
 #diary_date_input{
     font-size: 2em;
     font-family: anton;
+    border-radius: 999999px;
+    padding-left: 30px;
+    padding-right: 30px;
     opacity: .7;
 }
 
