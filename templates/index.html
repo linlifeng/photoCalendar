@@ -53,9 +53,9 @@
 
     <div id="diary_display" class="modal" style="display: none"></div>
     <!--end  modal-->
-
-    <script src="{{ url_for('static', filename='js/mobile.js') }}"></script>
-
+    {% if not search_result %}
+        <script src="{{ url_for('static', filename='js/mobile.js') }}"></script>
+    {% endif %}
 </body>
 </html>
 
