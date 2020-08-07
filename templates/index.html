@@ -29,14 +29,14 @@
 <body>
     <div id="searchBar">
         <form action="/search">
-            <input type="search" id="search_input" name="search" pattern=".*\S.*" placeholder="Search..">
+            <input style="display: none" type="search" id="search_input" name="search" pattern=".*\S.*" placeholder="Search..">
         </form>
         <div id="search_result">{{ search_result | safe }}</div>
     </div>
 
 
-    <div id="background" onclick="showCalendar()"> </div>
-    <div id="curtain" onclick="showCalendar()">{{ greetings }}</div>
+    <div id="background"> </div>
+    <div id="curtain" onclick="toggleSearch()">{{ greetings }}</div>
 
     <div id="blurbackground" style="display:none"></div>
     <div id="divCalendar" style="display:none"></div>
@@ -44,7 +44,7 @@
     <button id="btnPrev" type="button" style="display:none">上个月</button>
     <button id="btnNext" type="button" style="display:none">下个月</button>
     <div id="clock"></div>
-    <div id="date"></div>
+    <div id="date" onclick="showCalendar()"></div>
 
     <!-- modals -->
     <div id="adminbox" class="modal" style="display:none">

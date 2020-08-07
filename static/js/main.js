@@ -101,6 +101,9 @@ function showSearchResult(){
 function hideSearchResult(){
     $('#search_result').fadeOut();
 }
+function toggleSearch(){
+    $('#search_input').fadeToggle('slow');
+}
 
 $("#search_input").focus(function(){
     showSearchResult();
