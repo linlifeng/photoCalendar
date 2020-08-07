@@ -55,6 +55,8 @@
     <!--end  modal-->
     {% if not search_result %}
         <script src="{{ url_for('static', filename='js/mobile.js') }}"></script>
+    {% else %}
+        <script> var isMobile = false; </script>
     {% endif %}
 </body>
 </html>

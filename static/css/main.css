@@ -73,16 +73,22 @@ opacity: .5;
     border-radius: 99999px;
     font-size: large;
     border: none;
-    opacity: .5;
+    opacity: .6;
     padding-left: 20px;
     z-index: 4;
+    backdrop-filter: blur(30px);
+}
+
+#search_input:focus{
+    outline: none;
+    opacity: .9;
 }
 
 #search_result{
     position: fixed;
     top: 20%;
     width: 100%;
-    height: 75%;
+    height: 60%;
     padding: 0px;
     /*backdrop-filter: blur(10px);*/
     overflow: auto;
@@ -93,7 +99,7 @@ opacity: .5;
     height: auto;
     margin-left: 10%;
     width: 80%;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(60px);
     border-radius: 20px;
     padding-left: 10px;
     box-shadow: 5px 5px 14px rgba(25,25,25,.6);
@@ -116,6 +122,7 @@ opacity: .5;
     background-color: none;
 }
 #btnNext, #btnPrev {
+    outline: none;
 	z-index: 6; 
 	position: fixed; 
 	width:20%; 
@@ -164,7 +171,9 @@ a{
     cursor: pointer;
 }
 a:hover{opacity: 1}
-
+#calendarTable{
+    backdrop-filter: blur(10px);
+}
 #calendarTable td{
     background-size: cover;
     background-repeat: no-repeat;
@@ -173,11 +182,12 @@ a:hover{opacity: 1}
     /*background:url("../interface_assets/image-blur.jpg") no-repeat center center fixed;*/
     text-align: center;
     border-radius: 10px;
-    backdrop-filter: blur(10px);
     color: white;
 }
 #calendarTable td.filled_date{
-    background-color: rgba(50,50,50,.1);
+/*this is no longer used due to that finding which date is filled takes too long*/
+    /*background-color: rgba(50,50,50,.1);*/
+    backdrop-filter: blur(100px);
 }
 #calendarTable td a{
     display: block;

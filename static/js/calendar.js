@@ -170,7 +170,7 @@ Calendar.prototype.showMonth = function(y, m) {
         else{
             html += '<td class="empty_date" style="background-image: url(./static/photos/thumb-'
                         + expandedm+expandedi+y
-                        +  '.jpg)" onclick="showDiary(\''
+                        +  '.jpg);" onclick="showDiary(\''
              +  expandedm + expandedi + y
              + '\')"><a>' + i + '</a></td>';
         }
