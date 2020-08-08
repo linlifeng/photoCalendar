@@ -21,7 +21,7 @@ function hideDiary()
 // moved from main html
 
 function useLightBox(){
-        lightbox.option({
+    lightbox.option({
         'resizeDuration': 200,
         'wrapAround': true
     })

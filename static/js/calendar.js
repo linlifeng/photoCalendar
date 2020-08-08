@@ -212,6 +212,7 @@ window.onload = function() {
         c.previousMonth();
     };
     hideCalendar();
+    hideSearchResult();
 }
 
 

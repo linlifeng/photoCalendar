@@ -36,8 +36,10 @@
 
 
     <div id="background"> </div>
-    <div id="curtain" onclick="toggleSearch()">{{ greetings }}</div>
-
+    {% if authenticated %}
+    <div id="curtain" onclick="toggleSearch()">
+            {{ greetings }}
+    </div>
     <div id="blurbackground" style="display:none"></div>
     <div id="divCalendar" style="display:none"></div>
         
@@ -45,6 +47,12 @@
     <button id="btnNext" type="button" style="display:none">下个月</button>
     <div id="clock"></div>
     <div id="date" onclick="showCalendar()"></div>
+
+    {% else %}
+            <div id="greetings">
+                <a href="/login_page">Login Here</a>
+            </div>
+    {% endif %}
 
     <!-- modals -->
     <div id="adminbox" class="modal" style="display:none">
@@ -58,6 +66,7 @@
     {% else %}
         <script> var isMobile = false; </script>
     {% endif %}
+
 </body>
 </html>
 

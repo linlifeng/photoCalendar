@@ -7,6 +7,9 @@ input[type=text], input[type=password] {
     box-sizing: border-box;
     font-size: 2em;
 }
+input{
+    outline:none
+}
 
 /* Set a style for all buttons */
 button {
@@ -53,6 +56,23 @@ opacity: .5;
 
 #monthHeader{cursor: pointer}
 
+#loginInput{
+    position: fixed;
+    top: 40%;
+    left: 40%;
+    height:5%;
+    width:20%;
+    border-radius: 99999px;
+    font-size: large;
+    border: none;
+    opacity: .6;
+    padding-left: 20px;
+    z-index: 4;
+    backdrop-filter: blur(130px);
+}
+#loginInput:focus{
+    opacity: 1;
+}
 
 #infoBox, #blurbackground{
     position: fixed;
@@ -242,7 +262,20 @@ a:hover{opacity: 1}
     background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,0)); /* Standard syntax */
     opacity: .8
 }
-
+#greetings{
+    position: fixed;
+    top: 40%;
+    left: 40%;
+    height:5%;
+    width:20%;
+    border-radius: 99999px;
+    font-size: large;
+    border: none;
+    opacity: .6;
+    padding-left: 20px;
+    z-index: 5;
+    backdrop-filter: blur(130px);
+}
 #adminbox{
     z-index:100;
     text-align: center;

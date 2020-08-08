@@ -1,6 +1,7 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, send_from_directory
+from flask import Flask, request, render_template, redirect, url_for, flash, send_from_directory, abort, redirect
 from werkzeug.utils import secure_filename
 import os, json
+from flask_login import LoginManager
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
@@ -10,16 +11,65 @@ PHOTO_FOLDER = app.root_path + '/static/photos/'
 DIARY_FOLDER = app.root_path + '/static/diary/'
 app.config['UPLOAD_FOLDER'] = PHOTO_FOLDER
 app.config['DIARY_FOLDER'] = DIARY_FOLDER
+SITE_PASSWORD = '123456'
+
+# login_manager = LoginManager()
+# login_manager.init_app(app)
+#
+# @login_manager.user_loader
+# def load_user(user_id):
+#     return User.get(user_id)
+#
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     # Here we use a class of some kind to represent and validate our
+#     # client-side form data. For example, WTForms is a library that will
+#     # handle this for us, and we use a custom LoginForm to validate.
+#     form = LoginForm()
+#     if form.validate_on_submit():
+#         # Login and validate the user.
+#         # user should be an instance of your `User` class
+#         login_user(user)
+#
+#         flash('Logged in successfully.')
+#
+#         next = request.args.get('next')
+#         # is_safe_url should check if the url is safe for redirects.
+#         # # See http://flask.pocoo.org/snippets/62/ for an example.
+#         # if not is_safe_url(next):
+#         #     return abort(400)
+#
+#         return redirect(next or url_for('/'))
+#     return render_template('login.html', form=form)
+
+
+
+@app.route("/login_page/")
+def login_page():
+    return render_template("login.html")
 
 
 @app.route("/", methods=['GET', 'POST'])
+def login():
+    if not request.form:
+        return render_template("index.html", greetings="", authenticated=False)
+    password = request.form['password']
+    if password == SITE_PASSWORD:
+        return render_template("index.html", greetings="", authenticated=True)
+    else:
+        return login_page()
+
+
+# this would bypass the login step
+@app.route("/secretBackDoor", methods=['GET', 'POST'])
 def default_home():
     return render_template("index.html", greetings="")
+# end
 
 
-@app.route("/<username>", methods=['GET', 'POST'])
-def user_home(username):
-    return render_template("index.html", greetings="Hello " + username)
+# @app.route("/<username>", methods=['GET', 'POST'])
+# def user_home(username):
+#     return render_template("index.html", greetings="Hello " + username)
 
 
 @app.route('/favicon.ico')
@@ -45,7 +95,7 @@ def write_diary(date):
         content = existing_content['content']
     else:
         content = ''
-    return render_template("write_diary.html", date=formatted_date, content=content)
+    return render_template("write_diary.html", date=formatted_date, alt_date=date, content=content)
 
 def render_diary(date):
     diary_f_name = DIARY_FOLDER + date + '.json'
