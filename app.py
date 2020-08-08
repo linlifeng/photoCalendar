@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, flash, send_from_directory, abort, redirect
 from werkzeug.utils import secure_filename
 import os, json
-from flask_login import LoginManager
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
