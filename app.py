@@ -147,6 +147,7 @@ def upload_and_save_image_file(request):
             image = image.rotate(90, expand=True)
     # end restoring rotation issue
 
+    if image.mode in ("RGBA", "P"): image = image.convert("RGB") #'a' is not allowed in PNG
     image.thumbnail(MAX_SIZE)
     image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     # create thumbnail
