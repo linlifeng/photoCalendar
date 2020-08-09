@@ -152,6 +152,7 @@ def upload_and_save_image_file(request):
     image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     # create thumbnail
     image.thumbnail(THUMB_SIZE)
+    print("saving to %s and %s" % (filename, thumbnameFilename))
     image.save(os.path.join(app.config['UPLOAD_FOLDER'], thumbnameFilename))
 
     # ## making thumbnail using just a white pixel (to fille the cell)
@@ -204,8 +205,8 @@ def generate_diary():
     outf.write(json.dumps(output))
 
     # color the date cell background when content is present.
-    thumbnameFilename = 'thumb-' + date + '.jpg'
-    os.system('ln -s %s %s'%(PHOTO_FOLDER+'white_pixel.png', PHOTO_FOLDER+thumbnameFilename))
+    # thumbnameFilename = 'thumb-' + date + '.jpg'
+    # os.system('ln -s %s %s'%(PHOTO_FOLDER+'white_pixel.png', PHOTO_FOLDER+thumbnameFilename))
 
     file = request.files['diary_image_upload_input']
     if file and allowed_file(file.filename):
