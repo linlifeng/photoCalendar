@@ -56,19 +56,24 @@ opacity: .5;
 
 #monthHeader{cursor: pointer}
 
-#loginInput{
+#loginBox{
     position: fixed;
     top: 40%;
     left: 40%;
-    height:5%;
     width:20%;
-    border-radius: 99999px;
+    border-radius: 20px;
     font-size: large;
+    padding: 10px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     border: none;
-    opacity: .6;
-    padding-left: 20px;
     z-index: 4;
-    backdrop-filter: blur(130px);
+    backdrop-filter: blur(30px);
+}
+#loginInput{
+    border-radius: 99999px;
+    height: 5%;
+    opacity: .6;
 }
 #loginInput:focus{
     opacity: 1;

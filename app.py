@@ -51,7 +51,7 @@ def login_page():
 @app.route("/", methods=['GET', 'POST'])
 def login():
     if not request.form:
-        return render_template("index.html", greetings="", authenticated=False)
+        return login_page()
     password = request.form['password']
     if password == SITE_PASSWORD:
         return render_template("index.html", greetings="", authenticated=True)
