@@ -94,6 +94,7 @@ def write_diary(date):
         content = existing_content['content']
     else:
         content = ''
+        date = 'default_photo'
     return render_template("write_diary.html", date=formatted_date, alt_date=date, content=content)
 
 def render_diary(date):
@@ -125,9 +126,22 @@ def upload_and_save_image_file(request):
     date = m + d + y
     filename = date + '.jpg'  # rename uploaded file to the date format so that it can be recognized.
     thumbnameFilename = 'thumb-' + filename
+
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    # ## making thumbnail
-    os.system('ln -s %s %s'%(PHOTO_FOLDER+'white_pixel.png', PHOTO_FOLDER+thumbnameFilename))
+    # the photo can be very big. Downsize to save space
+    from PIL import Image
+    image = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    MAX_SIZE = (1200, 800)
+    THUMB_SIZE = (200, 200)
+    image.thumbnail(MAX_SIZE)
+    image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    # create thumbnail
+    image.thumbnail(THUMB_SIZE)
+    image.save(os.path.join(app.config['UPLOAD_FOLDER'], thumbnameFilename))
+
+    # ## making thumbnail using just a white pixel (to fille the cell)
+    # os.system('ln -s %s %s'%(PHOTO_FOLDER+'white_pixel.png', PHOTO_FOLDER+thumbnameFilename))
+
     ## replace the background photo with today's new photo.
     from datetime import datetime
     today = datetime.today().date()
@@ -138,11 +152,6 @@ def upload_and_save_image_file(request):
         os.system('cp %s %s' % (PHOTO_FOLDER + filename, app.root_path + '/static/interface_assets/image.jpg'))
     ## end replace background.
 
-    # from PIL import Image
-    # image = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    # MAX_SIZE = (200, 200)
-    # image.thumbnail(MAX_SIZE)
-    # image.save(os.path.join(app.config['UPLOAD_FOLDER'], thumbnameFilename))
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
