@@ -62,7 +62,7 @@ def login():
 # this would bypass the login step
 @app.route("/secretBackDoor", methods=['GET', 'POST'])
 def default_home():
-    return render_template("index.html", greetings="")
+    return render_template("index.html", greetings="", authenticated=True)
 # end
 
 
@@ -101,7 +101,7 @@ def render_diary(date):
     diary_f_name = DIARY_FOLDER + date + '.json'
     photo_f_name = date + '.jpg'
     if not os.path.exists(PHOTO_FOLDER + photo_f_name):
-        photo_f_name = 'default_photo.gif'
+        photo_f_name = 'default_photo.jpg'
     diary = json.load(open(diary_f_name))
     content = diary['content']
     date = diary['date']
@@ -218,7 +218,7 @@ def search_diary():
     search_result = '<table id="search_result_table">'
 
     if not key:
-        return render_template("index.html")
+        return render_template("index.html", authenticated="True")
     import subprocess
     try:
         result = subprocess.check_output('grep -i "%s" %s*' % (key, DIARY_FOLDER), shell=True)
@@ -228,7 +228,7 @@ def search_diary():
                          'style="width:60px;"' \
                          'onclick="hideSearchResult()"></td></tr>'
         search_result += '</table>'
-        return render_template("index.html", search_result=search_result)
+        return render_template("index.html", search_result=search_result, authenticated=True)
 
     result_list = result.decode('utf-8').split('\n')
     # search_result = ''
@@ -253,7 +253,7 @@ def search_diary():
                      'style="width:60px;"' \
                      'onclick="hideSearchResult()"></td></tr>'
     search_result += '</table>'
-    return render_template("index.html", search_result=search_result)
+    return render_template("index.html", search_result=search_result, authenticated=True)
 
 if __name__ == "__main__":
     app.secret_key = 'some secret key'
