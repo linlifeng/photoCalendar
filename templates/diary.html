@@ -1,11 +1,11 @@
-    <script>useSwipeBox();</script>
-    <p> {{ content | safe }} </p>
+<script>useSwipeBox();</script>
+<p> {{ content | safe }} </p>
 
-    <a class="swipebox" href="static/photos/{{ photo }}">
-        <img class="diary_image" src="static/photos/{{ photo }}"/>
-    </a>
+<a class="swipebox" href="static/photos/{{ photo }}">
+    <img class="diary_image" src="static/photos/{{ photo }}"/>
+</a>
 
-    <img class="modal_close_button" src="static/interface_assets/close.png"
-         onclick="hideDiary()">
-    <img id="diary_edit_button" src="static/interface_assets/edit.png"
-         onclick="showEditDiary('{{ date }}')">
+<img class="modal_close_button" src="static/interface_assets/close.png"
+     onclick="hideDiary()">
+<img id="diary_edit_button" src="static/interface_assets/edit.png"
+     onclick="showEditDiary('{{ date }}')">
