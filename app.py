@@ -139,7 +139,9 @@ def upload_and_save_image_file(request):
         if ExifTags.TAGS[orientation] == 'Orientation': break
     if image._getexif():
         exif = dict(image._getexif().items())
-        if exif[orientation] == 3:
+        if orientation not in exif:
+            pass
+        elif exif[orientation] == 3:
             image = image.rotate(180, expand=True)
         elif exif[orientation] == 6:
             image = image.rotate(270, expand=True)
