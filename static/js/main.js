@@ -4,14 +4,14 @@
 //    $('#adminbox').load("/uploadbox/" + date).fadeIn();
 //}
 
-function showEditDiary(date)
+function showEditDiary(date, username)
 {
-    $('#diary_display').load("/write_diary/" + date).fadeIn();
+    $('#diary_display').load("/write_diary/" + username + '/' + date).fadeIn();
 }
 
-function showDiary(date)
+function showDiary(date, username)
 {
-    $('#diary_display').load("/diary/" + date).fadeIn();
+    $('#diary_display').load("/diary/" + username + "/" + date ).fadeIn();
 }
 
 function hideDiary()

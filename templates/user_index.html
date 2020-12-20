@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">        
+    <title>LELE Calendar</title>
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Codystar" rel="stylesheet" /> <!--dotted font -->
+    <link href="https://fonts.googleapis.com/css?family=Long+Cang" rel="stylesheet" /> <!--Chinese handwriting -->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lightbox.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/swipebox.css') }}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dawning+of+a+New+Day">
+
+
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/swipebox.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/handSwipe.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+
+</head>
+<body>
+    <div id="searchBar">
+        <form action="/search">
+            <input style="display: none" type="search" id="search_input" name="search" pattern=".*\S.*" placeholder="Search..">
+        </form>
+        <div id="search_result">{{ search_result | safe }}</div>
+    </div>
+
+
+    <div id="background"> </div>
+    {% if authenticated %}
+    <div id="curtain" onclick="toggleSearch()">
+            {{ greetings }}
+    </div>
+    <div id="blurbackground" style="display:none"></div>
+    <div id="divCalendar" style="display:none"></div>
+        
+    <button id="btnPrev" type="button" style="display:none">上个月</button>
+    <button id="btnNext" type="button" style="display:none">下个月</button>
+    <div id="clock"></div>
+    <div id="date" onclick="showCalendar()"></div>
+
+    {% else %}
+            <div id="loginBox">
+                <a href="/login_page">Login Here</a>
+            </div>
+    {% endif %}
+
+    <!-- modals -->
+    <div id="adminbox" class="modal" style="display:none">
+
+    </div>
+
+    <div id="diary_display" class="modal" style="display: none"></div>
+    <!--end  modal-->
+    {% if not search_result %}
+        <script src="{{ url_for('static', filename='js/mobile.js') }}"></script>
+    {% else %}
+        <script> var isMobile = false; </script>
+    {% endif %}
+
+<script>
+    // On Load of the window
+    window.onload = function() {
+    // Start calendar
+    var c = new Calendar("divCalendar", "{{ user }}");
+    c.showCurrent();
+
+    // Bind next and previous button clicks
+    getId('btnNext').onclick = function() {
+        c.nextMonth();
+    };
+    getId('btnPrev').onclick = function() {
+        c.previousMonth();
+    };
+    hideCalendar();
+    //hideSearchResult();
+}
+</script>
+
+</body>
+</html>
+
+

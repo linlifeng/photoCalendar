@@ -15,7 +15,8 @@
 
 // P.S. I'm from Brazil, so the names of the weeks and months are in Portuguese.
 
-var Calendar = function(divId) {
+var Calendar = function(divId, userName) {
+    this.userName = userName;
 
     //Store div id
     this.divId = divId;
@@ -68,12 +69,11 @@ Calendar.prototype.previousMonth = function() {
 
 // Show current month
 Calendar.prototype.showCurrent = function() {
-    this.showMonth(this.CurrentYear, this.CurrentMonth);
+    this.showMonth(this.CurrentYear, this.CurrentMonth, this.userName);
 };
 
 // Show month (year, month)
-Calendar.prototype.showMonth = function(y, m) {
-
+Calendar.prototype.showMonth = function(y, m, userName) {
     var d = new Date()
         // First day of the week in the selected month
         , firstDayOfMonth = new Date(y, m, 1).getDay()
@@ -160,19 +160,16 @@ Calendar.prototype.showMonth = function(y, m) {
          var today_day = today.getDate();
          var today_year = today.getFullYear();
          var today_month = today.getMonth() + 1;
+         var file_date_format = expandedm + expandedi + y
          if(m+1 == today_month && i == today_day && y == today_year){
-            html += '<td class="today" style="background-image: url(./static/photos/thumb-'
-                        + expandedm+expandedi+y
-                        +  '.jpg)" onclick="showDiary(\''
-             +  expandedm + expandedi + y
-             + '\')"><a>' + i + '</a></td>';
+            html += '<td class="today" style="background-image: url(./static/photos/'+userName+'/thumb-'
+                        + file_date_format
+                        +  '.jpg)" onclick="showDiary(\''+file_date_format+'\', \''+userName+'\')"><a>' + i + '</a></td>';
         }
         else{
-            html += '<td class="empty_date" style="background-image: url(./static/photos/thumb-'
-                        + expandedm+expandedi+y
-                        +  '.jpg);" onclick="showDiary(\''
-             +  expandedm + expandedi + y
-             + '\')"><a>' + i + '</a></td>';
+            html += '<td class="empty_date" style="background-image: url(./static/photos/'+userName+'/thumb-'
+                        + file_date_format
+                        +  '.jpg);" onclick="showDiary(\''+file_date_format+'\', \''+userName+'\')"><a>' + i + '</a></td>';
         }
         // If Saturday, closes the row
         if ( dow == 6 ) {
@@ -198,21 +195,21 @@ Calendar.prototype.showMonth = function(y, m) {
     document.getElementById(this.divId).innerHTML = html;
 };
 
-// On Load of the window
-window.onload = function() {
-    // Start calendar
-    var c = new Calendar("divCalendar");
-    c.showCurrent();
-
-    // Bind next and previous button clicks
-    getId('btnNext').onclick = function() {
-        c.nextMonth();
-    };
-    getId('btnPrev').onclick = function() {
-        c.previousMonth();
-    };
-    hideCalendar();
-    //hideSearchResult();
-}
+//    // On Load of the window
+//    window.onload = function() {
+//    // Start calendar
+//    var c = new Calendar("divCalendar", "linlifeng");
+//    c.showCurrent();
+//
+//    // Bind next and previous button clicks
+//    getId('btnNext').onclick = function() {
+//        c.nextMonth();
+//    };
+//    getId('btnPrev').onclick = function() {
+//        c.previousMonth();
+//    };
+//    hideCalendar();
+//    //hideSearchResult();
+//    }
 
 
