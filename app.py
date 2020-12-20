@@ -4,6 +4,10 @@ import os, json
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
+USERS = {
+    "linlifeng": '123456',
+    "testuser": '123456'
+}
 
 app = Flask(__name__)
 PHOTO_FOLDER = app.root_path + '/static/photos/'
@@ -52,9 +56,10 @@ def login_page():
 def login():
     if not request.form:
         return login_page()
+    username = request.form['username']
     password = request.form['password']
-    if password == SITE_PASSWORD:
-        return render_template("index.html", greetings="", authenticated=True)
+    if username in USERS and password == USERS[username]:
+        return render_template("user_index.html", greetings="", authenticated=True, user=username)
     else:
         return login_page()
 
@@ -268,10 +273,10 @@ def search_diary(user):
     search_result += '</table>'
     return render_template("user_index.html", search_result=search_result, authenticated=True, user=user)
 
-
-@app.route('/<user>')
-def user_calendar(user):
-    return render_template("user_index.html", user=user, authenticated=True)
+#
+# @app.route('/<user>')
+# def user_calendar(user):
+#     return render_template("user_index.html", user=user, authenticated=True)
 
 if __name__ == "__main__":
     app.secret_key = 'some secret key'
