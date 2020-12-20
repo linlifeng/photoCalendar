@@ -163,13 +163,14 @@ def upload_and_save_image_file(request):
     # os.system('ln -s %s %s'%(PHOTO_FOLDER+'white_pixel.png', PHOTO_FOLDER+thumbnameFilename))
 
     ## replace the background photo with today's new photo.
-    from datetime import datetime
-    today = datetime.today().date()
-    thisyear = today.year
-    thismonth = today.month
-    thisday = today.day
-    if int(y) == int(thisyear) and int(m) == int(thismonth) and int(d) == thisday:
-        os.system('cp %s %s' % (PHOTO_FOLDER + filename, app.root_path + '/static/interface_assets/image.jpg'))
+    # from datetime import datetime
+    # today = datetime.today().date()
+    # thisyear = today.year
+    # thismonth = today.month
+    # thisday = today.day
+    # if int(y) == int(thisyear) and int(m) == int(thismonth) and int(d) == thisday:
+    #     os.system('cp %s %s' % (PHOTO_FOLDER + user + '/' + filename,
+    #                             app.root_path + '/static/interface_assets/image.jpg'))
     ## end replace background.
 
 
@@ -222,20 +223,22 @@ def generate_diary():
 @app.route("/search", methods=['POST','GET'])
 def search_diary():
     key = request.args['search']
+    user = request.args['search']
+
     search_result = '<table id="search_result_table">'
 
     if not key:
-        return render_template("index.html", authenticated="True")
+        return render_template("user_index.html", authenticated="True", user=user)
     import subprocess
     try:
-        result = subprocess.check_output('grep -i "%s" %s*' % (key, DIARY_FOLDER), shell=True)
+        result = subprocess.check_output('grep -i "%s" %s*' % (key, DIARY_FOLDER + user + '/'), shell=True)
     except subprocess.CalledProcessError:
         search_result += "<tr><td>%s is not found in any entries.</tr></td>" % key
         search_result += '<tr><td><img src="/static/interface_assets/close.png" ' \
                          'style="width:60px;"' \
                          'onclick="hideSearchResult()"></td></tr>'
         search_result += '</table>'
-        return render_template("index.html", search_result=search_result, authenticated=True)
+        return render_template("user_index.html", search_result=search_result, authenticated=True, user=user)
 
     result_list = result.decode('utf-8').split('\n')
     # search_result = ''
@@ -260,7 +263,7 @@ def search_diary():
                      'style="width:60px;"' \
                      'onclick="hideSearchResult()"></td></tr>'
     search_result += '</table>'
-    return render_template("index.html", search_result=search_result, authenticated=True)
+    return render_template("user_index.html", search_result=search_result, authenticated=True, user=user)
 
 
 @app.route('/<user>')

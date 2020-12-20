@@ -30,6 +30,7 @@
     <div id="searchBar">
         <form action="/search">
             <input style="display: none" type="search" id="search_input" name="search" pattern=".*\S.*" placeholder="Search..">
+            <input type="hidden" value="{{ user }}" name="user" />
         </form>
         <div id="search_result">{{ search_result | safe }}</div>
     </div>
