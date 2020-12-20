@@ -28,7 +28,7 @@
 </head>
 <body>
     <div id="searchBar">
-        <form action="/search">
+        <form action="/{{ user }}/search">
             <input style="display: none" type="search" id="search_input" name="search" pattern=".*\S.*" placeholder="Search..">
             <input type="hidden" value="{{ user }}" name="user" />
         </form>

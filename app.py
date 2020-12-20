@@ -220,10 +220,10 @@ def generate_diary():
     return '', 204
 
 
-@app.route("/search", methods=['POST','GET'])
-def search_diary():
+@app.route("/<user>/search", methods=['POST','GET'])
+def search_diary(user):
     key = request.args['search']
-    user = request.args['search']
+    # user = request.args['search']
 
     search_result = '<table id="search_result_table">'
 
@@ -245,18 +245,21 @@ def search_diary():
     import re
     for hit in result_list:
         file = hit.replace(DIARY_FOLDER, '').split(':')[0]
-        date = file.split('.')[0]
+        print(hit)
+        date = file.split('.')[0].replace(user+'/', '')
         m = date[:2]
         d = date[2:4]
         y = date[4:]
         formatted_date = '-'.join([y, m, d])
+
         if date:
-            hit_content = ':'.join(hit.replace(DIARY_FOLDER, '').split(':')[1:])
+            hit_content = ':'.join(hit.replace(DIARY_FOLDER + user, '').split(':')[1:])
             hit_content = json.loads(hit_content)['content']
             hit_content = re.sub('<[^<]+>', "", hit_content)
             if len(hit_content) > 50:
                 hit_content = hit_content[:50] + '...'
-            link = '<a onclick="showDiary(\'%s\')">%s</a><br/>' % (date, formatted_date)
+            link = '<a onclick="showDiary(\'%s\', \'%s\')">%s</a><br/>' % (date, user, formatted_date)
+            print(link)
             row='<tr><td>' + link + '</td><td>' + hit_content + '</td></tr>'
             search_result += row
     search_result += '<tr><td><img src="/static/interface_assets/close.png" ' \

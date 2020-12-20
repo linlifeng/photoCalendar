@@ -10,15 +10,15 @@
 
         <hr/>
 
-        <label for="diary_image_upload_input" id="camera_label"><img src="static/interface_assets/camera.png"></label>
+        <label for="diary_image_upload_input" id="camera_label"><img src="/static/interface_assets/camera.png"></label>
         <br/>
         <input type="file" name="diary_image_upload_input" id="diary_image_upload_input" style="display: none" />
         <input type="hidden" value="{{ user }}" name="user" />
         <img src="/static/photos/{{ user }}/{{ alt_date }}.jpg" style="width: 50%; margin-left:25%" />
         <button id="diary_submit_button" name="sub" onclick="hideDiary()">
-            <img id="diary_save_button" src="static/interface_assets/save.png">
+            <img id="diary_save_button" src="/static/interface_assets/save.png">
         </button>
-        <img class="modal_close_button" src="static/interface_assets/close.png"
+        <img class="modal_close_button" src="/static/interface_assets/close.png"
             onclick="hideDiary()">
     </div>
 </form>
