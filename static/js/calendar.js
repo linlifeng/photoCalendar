@@ -162,12 +162,12 @@ Calendar.prototype.showMonth = function(y, m, userName) {
          var today_month = today.getMonth() + 1;
          var file_date_format = expandedm + expandedi + y
          if(m+1 == today_month && i == today_day && y == today_year){
-            html += '<td class="today" style="background-image: url(./static/photos/'+userName+'/thumb-'
+            html += '<td class="today" style="background-image: url(/static/photos/'+userName+'/thumb-'
                         + file_date_format
                         +  '.jpg)" onclick="showDiary(\''+file_date_format+'\', \''+userName+'\')"><a>' + i + '</a></td>';
         }
         else{
-            html += '<td class="empty_date" style="background-image: url(./static/photos/'+userName+'/thumb-'
+            html += '<td class="empty_date" style="background-image: url(/static/photos/'+userName+'/thumb-'
                         + file_date_format
                         +  '.jpg);" onclick="showDiary(\''+file_date_format+'\', \''+userName+'\')"><a>' + i + '</a></td>';
         }
