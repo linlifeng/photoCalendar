@@ -168,14 +168,18 @@ def upload_and_save_image_file(request):
     # os.system('ln -s %s %s'%(PHOTO_FOLDER+'white_pixel.png', PHOTO_FOLDER+thumbnameFilename))
 
     ## replace the background photo with today's new photo.
-    # from datetime import datetime
-    # today = datetime.today().date()
-    # thisyear = today.year
-    # thismonth = today.month
-    # thisday = today.day
-    # if int(y) == int(thisyear) and int(m) == int(thismonth) and int(d) == thisday:
-    #     os.system('cp %s %s' % (PHOTO_FOLDER + user + '/' + filename,
-    #                             app.root_path + '/static/interface_assets/image.jpg'))
+    from datetime import datetime
+    today = datetime.today().date()
+    thisyear = today.year
+    thismonth = today.month
+    thisday = today.day
+    if int(y) == int(thisyear) and int(m) == int(thismonth) and int(d) == thisday:
+        ## changing for the entire site:
+        # os.system('cp %s %s' % (PHOTO_FOLDER + user + '/' + filename,
+        #                         app.root_path + '/static/interface_assets/image.jpg'))
+        ## changing for user only:
+        os.system('cp %s %s' % (PHOTO_FOLDER + user + '/' + filename,
+                                PHOTO_FOLDER + user + '/image.jpg'))
     ## end replace background.
 
 

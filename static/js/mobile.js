@@ -21,7 +21,7 @@ if( isMobile == true) {
     showCalendar();
     $("#btnNext").hide();
     $("#btnPrev").hide();
-    showEditDiary(date);
+    showEditDiary(date, user);
 }
 else{
     useLightBox();
