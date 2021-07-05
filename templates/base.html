@@ -1,0 +1,60 @@
+<!doctype html>
+<title>{% block title %}{% endblock %}</title>
+<HEAD>
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>LELE Calendar</title>
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Codystar" rel="stylesheet" /> <!--dotted font -->
+    <link href="https://fonts.googleapis.com/css?family=Long+Cang" rel="stylesheet" /> <!--Chinese handwriting -->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lightbox.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/swipebox.css') }}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dawning+of+a+New+Day">
+
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/swipebox.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/handSwipe.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
+
+    <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+</HEAD>
+
+<BODY>
+    <section class="content">
+        {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+        {% endfor %}
+        {% block content %}{% endblock %}
+    </section>
+</BODY>
+
+
+<script>
+    // On Load of the window
+    window.onload = function() {
+    // Start calendar
+    var c = new Calendar("divCalendar", "{{ user }}");
+    c.showCurrent();
+
+    // Bind next and previous button clicks
+    getId('btnNext').onclick = function() {
+        c.nextMonth();
+    };
+    getId('btnPrev').onclick = function() {
+        c.previousMonth();
+    };
+    hideCalendar();
+    //hideSearchResult();
+}
+</script>
+
+
+
+
+

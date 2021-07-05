@@ -1,6 +1,6 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, send_from_directory, abort, redirect
+from flask import Flask, request, render_template, redirect, url_for, flash, send_from_directory, redirect, Response
 from werkzeug.utils import secure_filename
-import os, json
+import os, json, glob
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
@@ -121,8 +121,6 @@ def show_diary_modal(date, user):
         return write_diary(date, user)
     else:
         return render_diary(date, user)
-
-
 
 
 def upload_and_save_image_file(request):
@@ -276,6 +274,27 @@ def search_diary(user):
                      'onclick="hideSearchResult()"></td></tr>'
     search_result += '</table>'
     return render_template("user_index.html", search_result=search_result, authenticated=True, user=user)
+
+
+@app.route("/download_diaries", methods=['POST'])
+def download_diaries():
+    user_name = request.form.get('user_name')
+    files_location = DIARY_FOLDER + user_name
+    photos_location = PHOTO_FOLDER + user_name
+    diary_list = glob.glob(files_location + '/*')
+    diary_all = ''
+    for file_location in diary_list:
+        f = open(file_location)
+        for l in f:
+            diary_all += l
+        f.close()
+
+    return Response(
+        diary_all,
+        mimetype="text/csv",
+        headers={"Content-disposition":
+                 "attachment; filename=diaries.json"})
+
 
 #
 # @app.route('/<user>')

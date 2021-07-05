@@ -232,7 +232,7 @@ a:hover{opacity: 1}
 .dayHeader{ height: 5%; background-color: rgba(0,0,0,0); font-size: 1em}
 #monthHeader{ font-size: 6em; background-color: rgba(0,0,0,0)}
 
-#clock, #date
+#clock, #date, #settings_buttons
 {
     z-index: 3;
     font-size: 3em;
@@ -247,6 +247,7 @@ a:hover{opacity: 1}
 }
 #clock{ left:120px;}
 #date{font-size: 5em; right:120px; bottom: 2%}
+#settings_buttons{top:0%}
 
 
 #curtain

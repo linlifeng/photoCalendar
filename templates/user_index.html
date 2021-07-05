@@ -1,32 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">        
-    <title>LELE Calendar</title>
-    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Codystar" rel="stylesheet" /> <!--dotted font -->
-    <link href="https://fonts.googleapis.com/css?family=Long+Cang" rel="stylesheet" /> <!--Chinese handwriting -->
+{% extends 'base.html' %}
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/lightbox.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/swipebox.css') }}" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dawning+of+a+New+Day">
-
-
-    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/swipebox.js') }}"></script>
-
-    <script src="{{ url_for('static', filename='js/handSwipe.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
-    <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
-
-</head>
-<body>
+{% block content %}
     <div id="searchBar">
         <form action="/{{ user }}/search">
             <input style="display: none" type="search" id="search_input" name="search" pattern=".*\S.*" placeholder="Search..">
@@ -39,6 +13,8 @@
     <div id="background">
         <img src="/static/photos/{{ user }}/image.jpg" style="display:block; width: 100vw; height: 100vh; object-fit: cover;" />
     </div>
+
+
     {% if authenticated %}
     <div id="curtain" onclick="toggleSearch()">
             {{ greetings }}
@@ -48,8 +24,17 @@
         
     <button id="btnPrev" type="button" style="display:none">上个月</button>
     <button id="btnNext" type="button" style="display:none">下个月</button>
+
+    <!-- what's displayed on screen -->
     <div id="clock"></div>
     <div id="date" onclick="showCalendar()"></div>
+    <div id="settings_buttons">
+        <form method="POST" action="{{ url_for('download_diaries') }}">
+            <input type="hidden" name="user_name" value={{ user }}>
+            <input type="submit" value="Download">
+        </form>
+    </div>
+    <!-- end on screen blocks -->
 
     {% else %}
             <div id="loginBox">
@@ -72,26 +57,6 @@
         <script> var isMobile = false; </script>
     {% endif %}
 
-<script>
-    // On Load of the window
-    window.onload = function() {
-    // Start calendar
-    var c = new Calendar("divCalendar", "{{ user }}");
-    c.showCurrent();
-
-    // Bind next and previous button clicks
-    getId('btnNext').onclick = function() {
-        c.nextMonth();
-    };
-    getId('btnPrev').onclick = function() {
-        c.previousMonth();
-    };
-    hideCalendar();
-    //hideSearchResult();
-}
-</script>
-
-</body>
-</html>
+{% endblock %}
 
 
