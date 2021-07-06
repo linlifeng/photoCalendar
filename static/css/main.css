@@ -298,14 +298,14 @@ a:hover{opacity: 1}
   border-style: solid;
   width: 50%;
 }
-#diary_edit_button, .modal_close_button, #diary_save_button{
+#diary_edit_button, .modal_close_button, #diary_save_button, #modal_export_button{
     position: fixed;
     top: 10px;
     right: 10px;
     width: 80px;
     opacity: .8;
 }
-#diary_edit_button, #diary_save_button{
+#diary_edit_button, #diary_save_button, #modal_export_button{
     left: 10px;
     background-color: rgba(0,0,0,0)
 }

@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, flash, send_from_directory, redirect, Response
 from werkzeug.utils import secure_filename
-import os, json, glob
+import os, json, glob, pdfkit
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
@@ -15,6 +15,7 @@ DIARY_FOLDER = app.root_path + '/static/diary/'
 app.config['UPLOAD_FOLDER'] = PHOTO_FOLDER
 app.config['DIARY_FOLDER'] = DIARY_FOLDER
 SITE_PASSWORD = '123456'
+TMP_FOLDER = '/tmp/'
 
 # login_manager = LoginManager()
 # login_manager.init_app(app)
@@ -102,6 +103,8 @@ def write_diary(date, user):
         date = 'default_photo'
     return render_template("write_diary.html", date=formatted_date, alt_date=date, content=content, user=user)
 
+
+@app.route("/<user>/<date>/render_diary", methods=['GET'])
 def render_diary(date, user):
     diary_f_name = DIARY_FOLDER + user + '/' + date + '.json'
     photo_f_name = user + '/' + date + '.jpg'
@@ -114,7 +117,6 @@ def render_diary(date, user):
 
 @app.route("/diary/<user>/<date>", methods=['GET'])
 def show_diary_modal(date, user):
-    #print(date)
     diary_f_name = DIARY_FOLDER + user + '/' + date + '.json'
     if not os.path.exists(diary_f_name):
         print("new:",date)
@@ -294,6 +296,23 @@ def download_diaries():
         mimetype="text/csv",
         headers={"Content-disposition":
                  "attachment; filename=diaries.json"})
+
+
+@app.route("/export_diary", methods=["POST"])
+def export_diary():
+    user_name = request.form.get('user_name')
+    date = request.form.get('date')
+
+    file_location = DIARY_FOLDER + user_name + '/' + date + '.json'
+    photo_location = PHOTO_FOLDER + user_name + '/' + date + '.jpg'
+
+    out_file = TMP_FOLDER + '/' + 'out.pdf'
+
+    # pdfkit.from_string('Hello!', out_file)
+    # pdfkit.from_file(file_location, out_file)
+    pdfkit.from_url("http://localhost:5000/"+url_for("render_diary", date=date, user=user_name), out_file)
+
+    return send_from_directory(directory=TMP_FOLDER, filename="out.pdf")
 
 
 #

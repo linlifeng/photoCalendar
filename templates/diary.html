@@ -5,7 +5,17 @@
     <img class="diary_image" src="/static/photos/{{ photo }}"/>
 </a>
 
+<div class="modal_export_button">
+<form method="POST" action="{{ url_for('export_diary') }}">
+    <input type="hidden" name="user_name" value="{{ user }}">
+    <input type="hidden" name="date" value="{{ date }}">
+    <input type="submit" value="Print">
+</form>
+</div>
+
+
 <img class="modal_close_button" src="/static/interface_assets/close.png"
      onclick="hideDiary()">
 <img id="diary_edit_button" src="/static/interface_assets/edit.png"
      onclick="showEditDiary('{{ date }}', '{{ user }}')">
+
