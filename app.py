@@ -308,6 +308,8 @@ def export_diary():
 
     out_file = TMP_FOLDER + '/' + 'out.pdf'
 
+    ## pdfkit method for exporting only works locally.
+    ## does not work on pythonanywhere, since it requires wkhtmltopdf which cannot be installed without root
     # pdfkit.from_string('Hello!', out_file)
     # pdfkit.from_file(file_location, out_file)
     pdfkit.from_url("http://localhost:5000/"+url_for("render_diary", date=date, user=user_name), out_file)
