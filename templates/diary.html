@@ -1,17 +1,19 @@
 <script>useSwipeBox();</script>
 <p> {{ content | safe }} </p>
 
-<a class="swipebox" href="/static/photos/{{ photo }}">
-    <img class="diary_image" src="/static/photos/{{ photo }}"/>
-</a>
-
 <div class="modal_export_button">
-<form method="POST" action="{{ url_for('export_diary') }}">
+<form method="POST" action="{{ url_for('export_diary_by_date') }}">
     <input type="hidden" name="user_name" value="{{ user }}">
     <input type="hidden" name="date" value="{{ date }}">
     <input type="submit" value="Print">
 </form>
 </div>
+
+<a class="swipebox" href="/static/photos/{{ photo }}">
+    <img class="diary_image" src="/static/photos/{{ photo }}"/>
+</a>
+
+
 
 
 <img class="modal_close_button" src="/static/interface_assets/close.png"

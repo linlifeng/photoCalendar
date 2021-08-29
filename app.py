@@ -324,8 +324,9 @@ def export_all_diaries():
 def export_diary_by_date():
     user_name = request.form.get('user_name')
     date = request.form.get('date')
-    yyyy, mm, dd = date.split("-")
-    date = mm+dd+yyyy
+    if '-' in date:
+        yyyy, mm, dd = date.split("-")
+        date = mm+dd+yyyy
     file_location = DIARY_FOLDER + user_name + '/' + date + '.json'
     photo_location = PHOTO_FOLDER + user_name + '/' + date + '.jpg'
 
