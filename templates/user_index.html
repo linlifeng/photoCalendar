@@ -29,9 +29,14 @@
     <div id="clock"></div>
     <div id="date" onclick="showCalendar()"></div>
     <div id="settings_buttons">
-        <form method="POST" action="{{ url_for('download_diaries') }}">
+        <form method="POST" action="{{ url_for('export_all_diaries') }}">
             <input type="hidden" name="user_name" value={{ user }}>
-            <input type="submit" value="Download">
+            <input type="submit" value="all">
+        </form>
+        <form method="POST" action="{{ url_for('export_diary_by_date') }}">
+            <input type="hidden" name="user_name" value={{ user }}>
+            <input type="date" name="date"/>
+            <input type="submit" value="by_date">
         </form>
     </div>
     <!-- end on screen blocks -->

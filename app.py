@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, send_from_directory, redirect, Response
+from flask import Flask, request, render_template, redirect, url_for, flash, send_from_directory, redirect, Response, make_response
 from werkzeug.utils import secure_filename
 import os, json, glob, pdfkit
 
@@ -125,6 +125,17 @@ def show_diary_modal(date, user):
         return render_diary(date, user)
 
 
+def fill_with_white_pixel(request):
+    user = request.form['user']
+    y, m, d = request.form['date'].split('-')
+    date = m + d + y
+    filename = date + '.jpg'  # rename uploaded file to the date format so that it can be recognized.
+    thumbnameFilename = 'thumb-' + filename
+
+    # ## making thumbnail using just a white pixel (to fille the cell)
+    os.system('ln -s %s %s'%(PHOTO_FOLDER + 'white_pixel.png', os.path.join(app.config['UPLOAD_FOLDER'] + user, thumbnameFilename)))
+    return '', 204
+
 def upload_and_save_image_file(request):
     file = request.files['diary_image_upload_input']
     user = request.form['user']
@@ -161,11 +172,8 @@ def upload_and_save_image_file(request):
     image.save(os.path.join(app.config['UPLOAD_FOLDER'] + user, filename))
     # create thumbnail
     image.thumbnail(THUMB_SIZE)
-    print("saving to %s and %s" % (filename, thumbnameFilename))
+    # print("saving to %s and %s" % (filename, thumbnameFilename))
     image.save(os.path.join(app.config['UPLOAD_FOLDER'] + user, thumbnameFilename))
-
-    # ## making thumbnail using just a white pixel (to fille the cell)
-    # os.system('ln -s %s %s'%(PHOTO_FOLDER+'white_pixel.png', PHOTO_FOLDER+thumbnameFilename))
 
     ## replace the background photo with today's new photo.
     from datetime import datetime
@@ -226,6 +234,8 @@ def generate_diary():
     file = request.files['diary_image_upload_input']
     if file and allowed_file(file.filename):
         upload_and_save_image_file(request)
+    else:
+        fill_with_white_pixel(request)
     return '', 204
 
 
@@ -278,8 +288,8 @@ def search_diary(user):
     return render_template("user_index.html", search_result=search_result, authenticated=True, user=user)
 
 
-@app.route("/download_diaries", methods=['POST'])
-def download_diaries():
+@app.route("/export_all_diaries", methods=['POST'])
+def export_all_diaries():
     user_name = request.form.get('user_name')
     files_location = DIARY_FOLDER + user_name
     photos_location = PHOTO_FOLDER + user_name
@@ -297,25 +307,43 @@ def download_diaries():
         headers={"Content-disposition":
                  "attachment; filename=diaries.json"})
 
+    #
+    #
+    # ## pdfkit method for exporting only works locally.
+    # ## does not work on pythonanywhere, since it requires wkhtmltopdf which cannot be installed without root
+    # pdf = pdfkit.from_string(diary_all, False)
+    # response = make_response(pdf)
+    # response.headers["Content-Type"] = "application/pdf"
+    # response.headers["Content-Disposition"] = "inline; filename=output.pdf"
+    # return response
 
-@app.route("/export_diary", methods=["POST"])
-def export_diary():
+
+
+
+@app.route("/export_diary_by_date", methods=["POST"])
+def export_diary_by_date():
     user_name = request.form.get('user_name')
     date = request.form.get('date')
-
+    yyyy, mm, dd = date.split("-")
+    date = mm+dd+yyyy
     file_location = DIARY_FOLDER + user_name + '/' + date + '.json'
     photo_location = PHOTO_FOLDER + user_name + '/' + date + '.jpg'
 
-    out_file = TMP_FOLDER + '/' + 'out.pdf'
 
     ## pdfkit method for exporting only works locally.
     ## does not work on pythonanywhere, since it requires wkhtmltopdf which cannot be installed without root
-    # pdfkit.from_string('Hello!', out_file)
-    # pdfkit.from_file(file_location, out_file)
-    pdfkit.from_url("http://localhost:5000/"+url_for("render_diary", date=date, user=user_name), out_file)
 
-    return send_from_directory(directory=TMP_FOLDER, filename="out.pdf")
+    pdf_content = ''
+    f = open(file_location)
+    for l in f:
+        pdf_content += l
+    f.close()
+    pdf = pdfkit.from_string(pdf_content, False) # pdfkit can also export from file and url. buggy not solved.
 
+    response = make_response(pdf)
+    response.headers["Content-Type"] = "application/pdf"
+    response.headers["Content-Disposition"] = "inline; filename=%s.pdf" % date
+    return response
 
 #
 # @app.route('/<user>')
