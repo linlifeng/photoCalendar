@@ -318,12 +318,15 @@ def export_all_diaries():
 
 
     html = HTML(string=html_content)
+    # css = CSS(string='''
+    #     @font-face {
+    #         font-family: Gentium;
+    #         src: url(http://example.com/fonts/Gentium.otf);
+    #     }
+    #     h1 { font-family: Gentium }''')
     css = CSS(string='''
-        @font-face {
-            font-family: Gentium;
-            src: url(http://example.com/fonts/Gentium.otf);
-        }
-        h1 { font-family: Gentium }''')
+        h1 { font-family: Arial }
+    ''')
 
     # html.write_pdf(
     #     '/tmp/example.pdf', stylesheets=[css])
@@ -379,12 +382,16 @@ def export_diary_by_date():
     ## testing weasyprint
     # html = HTML(string='<h1>The title</h1>')
     html = HTML(string=html_content)
+    # css = CSS(string='''
+    #     @font-face {
+    #         font-family: Gentium;
+    #         src: url(http://example.com/fonts/Gentium.otf);
+    #     }
+    #     h1 { font-family: Gentium }''')
+
     css = CSS(string='''
-        @font-face {
-            font-family: Gentium;
-            src: url(http://example.com/fonts/Gentium.otf);
-        }
-        h1 { font-family: Gentium }''')
+        h1 { font-family: Gentium }
+    ''')
 
     # html.write_pdf(
     #     '/tmp/example.pdf', stylesheets=[css])
