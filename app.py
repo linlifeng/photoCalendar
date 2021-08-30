@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for, flash, send_from_directory, redirect, Response, make_response
 from werkzeug.utils import secure_filename
 import os, json, glob, pdfkit
+from flask_weasyprint import HTML, CSS, render_pdf
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
@@ -294,18 +295,40 @@ def export_all_diaries():
     files_location = DIARY_FOLDER + user_name
     photos_location = PHOTO_FOLDER + user_name
     diary_list = glob.glob(files_location + '/*')
-    diary_all = ''
+
+    html_content = ''
     for file_location in diary_list:
         f = open(file_location)
+        pdf_content = ''
         for l in f:
-            diary_all += l
+            pdf_content += l.rstrip()
         f.close()
 
-    return Response(
-        diary_all,
-        mimetype="text/csv",
-        headers={"Content-disposition":
-                 "attachment; filename=diaries.json"})
+        pdf_content = json.loads(pdf_content)
+        if 'date' in pdf_content:
+            html_content += '<h2>%s</h2>' % pdf_content['date']
+        if 'content' in pdf_content:
+            html_content += '<p>%s</p>' % pdf_content['content']
+
+    # return Response(
+    #     diary_all,
+    #     mimetype="text/csv",
+    #     headers={"Content-disposition":
+    #              "attachment; filename=diaries.json"})
+
+
+    html = HTML(string=html_content)
+    css = CSS(string='''
+        @font-face {
+            font-family: Gentium;
+            src: url(http://example.com/fonts/Gentium.otf);
+        }
+        h1 { font-family: Gentium }''')
+
+    # html.write_pdf(
+    #     '/tmp/example.pdf', stylesheets=[css])
+
+    return render_pdf(html, stylesheets=[css])
 
     #
     #
@@ -331,20 +354,43 @@ def export_diary_by_date():
     photo_location = PHOTO_FOLDER + user_name + '/' + date + '.jpg'
 
 
-    ## pdfkit method for exporting only works locally.
-    ## does not work on pythonanywhere, since it requires wkhtmltopdf which cannot be installed without root
-
     pdf_content = ''
     f = open(file_location)
     for l in f:
-        pdf_content += l
+        pdf_content += l.rstrip()
     f.close()
-    pdf = pdfkit.from_string(pdf_content, False) # pdfkit can also export from file and url. buggy not solved.
 
-    response = make_response(pdf)
-    response.headers["Content-Type"] = "application/pdf"
-    response.headers["Content-Disposition"] = "inline; filename=%s.pdf" % date
-    return response
+    pdf_content = json.loads(pdf_content)
+    html_content = '<h2>%s</h2>' % date
+    for key in pdf_content:
+        if key == 'content':
+            html_content += '<p>%s</p>' % pdf_content[key]
+
+    ## pdfkit method for exporting only works locally.
+    ## does not work on pythonanywhere, since it requires wkhtmltopdf which cannot be installed without root
+    # pdf = pdfkit.from_string(pdf_content, False) # pdfkit can also export from file and url. buggy not solved.
+    #
+    # print(pdf)
+    # response = make_response(pdf)
+    # response.headers["Content-Type"] = "application/pdf"
+    # response.headers["Content-Disposition"] = "inline; filename=%s.pdf" % date
+    # return response
+
+    ## testing weasyprint
+    # html = HTML(string='<h1>The title</h1>')
+    html = HTML(string=html_content)
+    css = CSS(string='''
+        @font-face {
+            font-family: Gentium;
+            src: url(http://example.com/fonts/Gentium.otf);
+        }
+        h1 { font-family: Gentium }''')
+
+    # html.write_pdf(
+    #     '/tmp/example.pdf', stylesheets=[css])
+
+    return render_pdf(html, stylesheets=[css])
+
 
 #
 # @app.route('/<user>')
