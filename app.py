@@ -293,7 +293,7 @@ def search_diary(user):
 def export_all_diaries():
     user_name = request.form.get('user_name')
     files_location = DIARY_FOLDER + user_name
-    photos_location = PHOTO_FOLDER + user_name
+
     diary_list = glob.glob(files_location + '/*')
 
     html_content = ''
@@ -310,6 +310,8 @@ def export_all_diaries():
         if 'content' in pdf_content:
             html_content += '<p>%s</p>' % pdf_content['content']
 
+        html_content += '<img class="diary_image" src="/static/photos/%s/%s.jpg" />' % (user_name, pdf_content['date'])
+
     # return Response(
     #     diary_all,
     #     mimetype="text/csv",
@@ -318,15 +320,14 @@ def export_all_diaries():
 
 
     html = HTML(string=html_content)
-    # css = CSS(string='''
-    #     @font-face {
-    #         font-family: Gentium;
-    #         src: url(http://example.com/fonts/Gentium.otf);
-    #     }
-    #     h1 { font-family: Gentium }''')
     css = CSS(string='''
-        h1 { font-family: Arial }
-    ''')
+        @font-face {
+            font-family: Gentium;
+            src: url(http://example.com/fonts/Gentium.otf);
+        }
+        h1 { font-family: Gentium }
+        .diary_image { width: 100%; }
+        ''')
 
     # html.write_pdf(
     #     '/tmp/example.pdf', stylesheets=[css])
@@ -354,8 +355,6 @@ def export_diary_by_date():
         yyyy, mm, dd = date.split("-")
         date = mm+dd+yyyy
     file_location = DIARY_FOLDER + user_name + '/' + date + '.json'
-    photo_location = PHOTO_FOLDER + user_name + '/' + date + '.jpg'
-
 
     pdf_content = ''
     f = open(file_location)
@@ -368,6 +367,7 @@ def export_diary_by_date():
     for key in pdf_content:
         if key == 'content':
             html_content += '<p>%s</p>' % pdf_content[key]
+    html_content += '<img class="diary_image" src="/static/photos/%s/%s.jpg" />' % (user_name, date)
 
     ## pdfkit method for exporting only works locally.
     ## does not work on pythonanywhere, since it requires wkhtmltopdf which cannot be installed without root
@@ -382,16 +382,15 @@ def export_diary_by_date():
     ## testing weasyprint
     # html = HTML(string='<h1>The title</h1>')
     html = HTML(string=html_content)
-    # css = CSS(string='''
-    #     @font-face {
-    #         font-family: Gentium;
-    #         src: url(http://example.com/fonts/Gentium.otf);
-    #     }
-    #     h1 { font-family: Gentium }''')
-
     css = CSS(string='''
+        @font-face {
+            font-family: Gentium;
+            src: url(http://example.com/fonts/Gentium.otf);
+        }
         h1 { font-family: Gentium }
-    ''')
+        .diary_image { width: 100%; }
+        ''')
+
 
     # html.write_pdf(
     #     '/tmp/example.pdf', stylesheets=[css])
