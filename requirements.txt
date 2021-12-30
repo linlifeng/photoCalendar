@@ -3,3 +3,4 @@ flask-login
 Pillow
 pdfkit
 wkhtmltopdf
+flask_weasyprint
