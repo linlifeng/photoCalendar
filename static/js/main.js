@@ -80,6 +80,12 @@ function hideCalendar(){
     $("#date").fadeIn('slow');
 }
 
+function showSettings(){
+    $("#settings_panel").animate({left:"0px"}, 'fast');
+}
+function hideSettings(){
+    $("#settings_panel").animate({left:"-100%"}, 'fast');
+}
 
 // Get element by id
 function getId(id) {

@@ -26,18 +26,19 @@
         <button id="btnNext" type="button" style="display:none">下个月</button>
 
         <!-- what's displayed on screen -->
-        <div id="clock"></div>
+        <div id="clock" onclick="showSettings()"></div>
         <div id="date" onclick="showCalendar()"></div>
-        <div id="settings_buttons">
+        <div id="settings_panel">
             <form method="POST" action="{{ url_for('export_all_diaries') }}">
                 <input type="hidden" name="user_name" value={{ user }}>
-                <input type="submit" value="&darr;">
+                <button>&darr;</button>
             </form>
-    <!--        <form method="POST" action="{{ url_for('export_diary_by_date') }}">-->
-    <!--            <input type="hidden" name="user_name" value={{ user }}>-->
-    <!--            <input type="date" name="date"/>-->
-    <!--            <input type="submit" value="by_date">-->
-    <!--        </form>-->
+            <form method="POST" action="{{ url_for('export_diary_by_date') }}">
+                <input type="hidden" name="user_name" value={{ user }}>
+                <input type="date" name="date"/>
+                <input type="submit" value="by_date">
+            </form>
+            <button onclick="hideSettings()">Close</button>
         </div>
         <!-- end on screen blocks -->
 

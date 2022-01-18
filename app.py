@@ -355,7 +355,8 @@ def export_diary_by_date():
         yyyy, mm, dd = date.split("-")
         date = mm+dd+yyyy
     file_location = DIARY_FOLDER + user_name + '/' + date + '.json'
-
+    if not os.path.exists(file_location):
+        return render_pdf(HTML(string="No diary entry for this day: %s" % date))
     pdf_content = ''
     f = open(file_location)
     for l in f:
