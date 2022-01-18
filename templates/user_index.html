@@ -16,42 +16,39 @@
 
 
     {% if authenticated %}
-    <div id="curtain" onclick="toggleSearch()">
-            {{ greetings }}
-    </div>
-    <div id="blurbackground" style="display:none"></div>
-    <div id="divCalendar" style="display:none"></div>
-        
-    <button id="btnPrev" type="button" style="display:none">上个月</button>
-    <button id="btnNext" type="button" style="display:none">下个月</button>
+        <div id="curtain" onclick="toggleSearch()">
+                {{ greetings }}
+        </div>
+        <div id="blurbackground" style="display:none"></div>
+        <div id="divCalendar" style="display:none"></div>
 
-    <!-- what's displayed on screen -->
-    <div id="clock"></div>
-    <div id="date" onclick="showCalendar()"></div>
-    <div id="settings_buttons">
-        <form method="POST" action="{{ url_for('export_all_diaries') }}">
-            <input type="hidden" name="user_name" value={{ user }}>
-            <input type="submit" value="&darr;">
-        </form>
-<!--        <form method="POST" action="{{ url_for('export_diary_by_date') }}">-->
-<!--            <input type="hidden" name="user_name" value={{ user }}>-->
-<!--            <input type="date" name="date"/>-->
-<!--            <input type="submit" value="by_date">-->
-<!--        </form>-->
-    </div>
-    <!-- end on screen blocks -->
+        <button id="btnPrev" type="button" style="display:none">上个月</button>
+        <button id="btnNext" type="button" style="display:none">下个月</button>
+
+        <!-- what's displayed on screen -->
+        <div id="clock"></div>
+        <div id="date" onclick="showCalendar()"></div>
+        <div id="settings_buttons">
+            <form method="POST" action="{{ url_for('export_all_diaries') }}">
+                <input type="hidden" name="user_name" value={{ user }}>
+                <input type="submit" value="&darr;">
+            </form>
+    <!--        <form method="POST" action="{{ url_for('export_diary_by_date') }}">-->
+    <!--            <input type="hidden" name="user_name" value={{ user }}>-->
+    <!--            <input type="date" name="date"/>-->
+    <!--            <input type="submit" value="by_date">-->
+    <!--        </form>-->
+        </div>
+        <!-- end on screen blocks -->
 
     {% else %}
-            <div id="loginBox">
-                <a href="/login_page">Login Here</a>
-            </div>
+        <div id="loginBox">
+            <a href="/login_page">Login Here</a>
+        </div>
     {% endif %}
 
     <!-- modals -->
-    <div id="adminbox" class="modal" style="display:none">
-
-    </div>
-
+    <div id="adminbox" class="modal" style="display:none"></div>
     <div id="diary_display" class="modal" style="display: none"></div>
     <!--end  modal-->
 
