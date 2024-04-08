@@ -7,8 +7,11 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 USERS = {
     "linlifeng": '123456',
-    "testuser": '123456'
+    "testuser": '123456',
+    "lawrence": 'linxiubo'
 }
+# these users should all be lower cased, as later it will only check lower case for simplicity.
+# passwords of course are still case sensitive
 
 app = Flask(__name__)
 PHOTO_FOLDER = app.root_path + '/static/photos/'
@@ -60,7 +63,7 @@ def login():
         return login_page()
     username = request.form['username']
     password = request.form['password']
-    if username in USERS and password == USERS[username]:
+    if username.lower() in USERS and password == USERS[username]:
         return render_template("user_index.html", greetings="", authenticated=True, user=username)
     else:
         return login_page()
@@ -406,4 +409,4 @@ def export_diary_by_date():
 
 if __name__ == "__main__":
     app.secret_key = 'some secret key'
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port=8080)
