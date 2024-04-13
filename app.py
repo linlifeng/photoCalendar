@@ -21,34 +21,6 @@ app.config['DIARY_FOLDER'] = DIARY_FOLDER
 SITE_PASSWORD = '123456'
 TMP_FOLDER = '/tmp/'
 
-# login_manager = LoginManager()
-# login_manager.init_app(app)
-#
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return User.get(user_id)
-#
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     # Here we use a class of some kind to represent and validate our
-#     # client-side form data. For example, WTForms is a library that will
-#     # handle this for us, and we use a custom LoginForm to validate.
-#     form = LoginForm()
-#     if form.validate_on_submit():
-#         # Login and validate the user.
-#         # user should be an instance of your `User` class
-#         login_user(user)
-#
-#         flash('Logged in successfully.')
-#
-#         next = request.args.get('next')
-#         # is_safe_url should check if the url is safe for redirects.
-#         # # See http://flask.pocoo.org/snippets/62/ for an example.
-#         # if not is_safe_url(next):
-#         #     return abort(400)
-#
-#         return redirect(next or url_for('/'))
-#     return render_template('login.html', form=form)
 
 
 
@@ -76,20 +48,10 @@ def default_home():
 # end
 
 
-# @app.route("/<username>", methods=['GET', 'POST'])
-# def user_home(username):
-#     return render_template("index.html", greetings="Hello " + username)
-
-
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
-
-# @app.route("/uploadbox/<date>", methods=['GET'])
-# def uploadbox(date):
-#     return render_template("upload_modal.html", date=date)
 
 
 @app.route("/write_diary/<user>/<date>", methods=['GET'])
@@ -191,10 +153,6 @@ def upload_and_save_image_file(request):
     thismonth = today.month
     thisday = today.day
     if int(y) == int(thisyear) and int(m) == int(thismonth) and int(d) == thisday:
-        ## changing for the entire site:
-        # os.system('cp %s %s' % (PHOTO_FOLDER + user + '/' + filename,
-        #                         app.root_path + '/static/interface_assets/image.jpg'))
-        ## changing for user only:
         os.system('cp %s %s' % (PHOTO_FOLDER + user + '/' + filename,
                                 PHOTO_FOLDER + user + '/image.jpg'))
     ## end replace background.
@@ -316,12 +274,6 @@ def export_all_diaries():
 
         html_content += '<img class="diary_image" src="/static/photos/%s/%s.jpg" />' % (user_name, pdf_content['date'])
 
-    # return Response(
-    #     diary_all,
-    #     mimetype="text/csv",
-    #     headers={"Content-disposition":
-    #              "attachment; filename=diaries.json"})
-
 
     html = HTML(string=html_content)
     css = CSS(string='''
@@ -333,20 +285,7 @@ def export_all_diaries():
         .diary_image { width: 100%; }
         ''')
 
-    # html.write_pdf(
-    #     '/tmp/example.pdf', stylesheets=[css])
-
     return render_pdf(html, stylesheets=[css])
-
-    #
-    #
-    # ## pdfkit method for exporting only works locally.
-    # ## does not work on pythonanywhere, since it requires wkhtmltopdf which cannot be installed without root
-    # pdf = pdfkit.from_string(diary_all, False)
-    # response = make_response(pdf)
-    # response.headers["Content-Type"] = "application/pdf"
-    # response.headers["Content-Disposition"] = "inline; filename=output.pdf"
-    # return response
 
 
 
@@ -374,15 +313,6 @@ def export_diary_by_date():
             html_content += '<p>%s</p>' % pdf_content[key]
     html_content += '<img class="diary_image" src="/static/photos/%s/%s.jpg" />' % (user_name, date)
 
-    ## pdfkit method for exporting only works locally.
-    ## does not work on pythonanywhere, since it requires wkhtmltopdf which cannot be installed without root
-    # pdf = pdfkit.from_string(pdf_content, False) # pdfkit can also export from file and url. buggy not solved.
-    #
-    # print(pdf)
-    # response = make_response(pdf)
-    # response.headers["Content-Type"] = "application/pdf"
-    # response.headers["Content-Disposition"] = "inline; filename=%s.pdf" % date
-    # return response
 
     ## testing weasyprint
     # html = HTML(string='<h1>The title</h1>')
@@ -396,17 +326,8 @@ def export_diary_by_date():
         .diary_image { width: 100%; }
         ''')
 
-
-    # html.write_pdf(
-    #     '/tmp/example.pdf', stylesheets=[css])
-
     return render_pdf(html, stylesheets=[css])
 
-
-#
-# @app.route('/<user>')
-# def user_calendar(user):
-#     return render_template("user_index.html", user=user, authenticated=True)
 
 if __name__ == "__main__":
     app.secret_key = 'some secret key'

@@ -119,3 +119,19 @@ $("#search_input").focus(function(){
 $("#curtain").click(function(){
     hideSearchResult();
 });
+
+
+function previewImage(event) {
+    var imagePreview = document.getElementById('imagePreview');
+    var imageInput = event.target.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function() {
+        imagePreview.src = reader.result;
+        imagePreview.style.display = 'block';
+    };
+
+    if (imageInput) {
+        reader.readAsDataURL(imageInput);
+    }
+}
