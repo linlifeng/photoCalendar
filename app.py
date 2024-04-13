@@ -119,6 +119,7 @@ def render_diary(date, user):
     date = diary['date']
     return render_template("diary.html", content=content, photo=photo_f_name, date=date, user=user)
 
+
 @app.route("/diary/<user>/<date>", methods=['GET'])
 def show_diary_modal(date, user):
     diary_f_name = DIARY_FOLDER + user + '/' + date + '.json'
@@ -129,16 +130,18 @@ def show_diary_modal(date, user):
         return render_diary(date, user)
 
 
-def fill_with_white_pixel(request):
+def fill_default_image(request):
     user = request.form['user']
     y, m, d = request.form['date'].split('-')
     date = m + d + y
     filename = date + '.jpg'  # rename uploaded file to the date format so that it can be recognized.
     thumbnameFilename = 'thumb-' + filename
 
-    # ## making thumbnail using just a white pixel (to fille the cell)
+    # ## making thumbnail using just a white pixel (to fill the cell)
     os.system('ln -s %s %s'%(PHOTO_FOLDER + 'white_pixel.png', os.path.join(app.config['UPLOAD_FOLDER'] + user, thumbnameFilename)))
+    os.system('ln -s %s %s'%(PHOTO_FOLDER + 'default_photo.jpg', os.path.join(app.config['UPLOAD_FOLDER'] + user, filename)))
     return '', 204
+
 
 def upload_and_save_image_file(request):
     file = request.files['diary_image_upload_input']
@@ -173,10 +176,12 @@ def upload_and_save_image_file(request):
 
     if image.mode in ("RGBA", "P"): image = image.convert("RGB") #'a' is not allowed in PNG
     image.thumbnail(MAX_SIZE)
+    os.system('rm %s'% os.path.join(app.config['UPLOAD_FOLDER'] + user, filename))
     image.save(os.path.join(app.config['UPLOAD_FOLDER'] + user, filename))
     # create thumbnail
     image.thumbnail(THUMB_SIZE)
     # print("saving to %s and %s" % (filename, thumbnameFilename))
+    os.system("rm %s" % os.path.join(app.config['UPLOAD_FOLDER'] + user, thumbnameFilename))
     image.save(os.path.join(app.config['UPLOAD_FOLDER'] + user, thumbnameFilename))
 
     ## replace the background photo with today's new photo.
@@ -231,15 +236,11 @@ def generate_diary():
     output['date'] = date
     outf.write(json.dumps(output))
 
-    # color the date cell background when content is present.
-    # thumbnameFilename = 'thumb-' + date + '.jpg'
-    # os.system('ln -s %s %s'%(PHOTO_FOLDER+'white_pixel.png', PHOTO_FOLDER+thumbnameFilename))
-
     file = request.files['diary_image_upload_input']
     if file and allowed_file(file.filename):
         upload_and_save_image_file(request)
     else:
-        fill_with_white_pixel(request)
+        fill_default_image(request)
     return '', 204
 
 
